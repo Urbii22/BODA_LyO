@@ -22,7 +22,7 @@ Abre `http://localhost:3000`.
 
 1. Ejecuta `database/schema.sql` en Supabase Studio.
 2. Ejecuta `database/seed.sql`.
-3. Crea el bucket privado `submissions` con limite 5 MB y MIME allowlist `image/jpeg,image/png,image/webp`.
+3. Ejecuta `database/storage.sql` para crear el bucket privado `submissions` con limite 5 MB y MIME allowlist `image/jpeg,image/png,image/webp`.
 4. Copia `.env.local.example` a `.env.local` y completa las variables.
 
 ## Checks
