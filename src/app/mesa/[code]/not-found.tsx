@@ -1,0 +1,14 @@
+import Link from "next/link";
+import { Card } from "../../../components/ui/Card";
+
+export default function MesaNotFound() {
+  return (
+    <main className="grid min-h-screen place-items-center px-4">
+      <Card className="max-w-md text-center">
+        <h1 className="font-serif text-3xl font-bold">Mesa no encontrada</h1>
+        <p className="mt-3 text-tinta/70">Pregunta a los novios o revisa el QR. Seguro que vuestra mision existe.</p>
+        <Link href="/" className="mt-5 inline-block font-semibold text-vino">Volver al inicio</Link>
+      </Card>
+    </main>
+  );
+}

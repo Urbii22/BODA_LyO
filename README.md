@@ -1,0 +1,33 @@
+# MesaQuest
+
+Juego social para la boda de Laura y Oscar: cada mesa escanea su QR, recibe una mision secreta, sube una foto como prueba y compite en un ranking publico.
+
+## Stack
+
+- Next.js 15 App Router, Server Components y Server Actions.
+- Tailwind v4 con tokens en `src/app/globals.css`.
+- Supabase Postgres + Storage privado.
+- Admin por PIN con cookie HTTP-only firmada.
+
+## Desarrollo
+
+```bash
+npm install
+npm run dev
+```
+
+Abre `http://localhost:3000`.
+
+## Supabase
+
+1. Ejecuta `database/schema.sql` en Supabase Studio.
+2. Ejecuta `database/seed.sql`.
+3. Crea el bucket privado `submissions` con limite 5 MB y MIME allowlist `image/jpeg,image/png,image/webp`.
+4. Copia `.env.local.example` a `.env.local` y completa las variables.
+
+## Checks
+
+```bash
+npm run lint
+npm run build
+```
