@@ -31,6 +31,7 @@ export type SubmissionWithRelations = Submission & {
 };
 
 export type NewSubmission = {
+  id?: string;
   weddingId: string;
   tableId: string;
   missionId: string;

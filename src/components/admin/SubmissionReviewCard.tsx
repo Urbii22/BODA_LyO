@@ -12,6 +12,12 @@ const statusTone = {
   rejected: "red" as const,
 };
 
+const statusCopy = {
+  pending: "pendiente",
+  approved: "aprobada",
+  rejected: "rechazada",
+};
+
 export function SubmissionReviewCard({ submission }: { submission: SubmissionWithRelations }) {
   return (
     <Card className="grid gap-4 lg:grid-cols-[280px_1fr]">
@@ -34,7 +40,7 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
               {submission.participantName} · {formatDate(submission.createdAt)}
             </p>
           </div>
-          <Badge tone={statusTone[submission.status]}>{submission.status}</Badge>
+          <Badge tone={statusTone[submission.status]}>{statusCopy[submission.status]}</Badge>
         </div>
         {submission.comment ? <p className="mt-4 rounded-md bg-marfil p-3 text-sm text-tinta/75">{submission.comment}</p> : null}
         <form action={reviewSubmission} className="mt-5 grid gap-3">

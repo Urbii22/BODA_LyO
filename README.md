@@ -1,6 +1,6 @@
 # MesaQuest
 
-Juego social para la boda de Laura y Oscar: cada mesa escanea su QR, recibe una mision secreta, sube una foto como prueba y compite en un ranking publico.
+Juego social para la boda de Luis y Oscar: cada mesa escanea su QR, recibe una mision secreta, sube una foto como prueba y compite en un ranking publico.
 
 ## Stack
 

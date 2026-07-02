@@ -17,6 +17,7 @@ export async function createSubmission(input: NewSubmission): Promise<Submission
   const { data, error } = await getSupabaseAdmin()
     .from("submissions")
     .insert({
+      id: input.id,
       wedding_id: input.weddingId,
       table_id: input.tableId,
       mission_id: input.missionId,

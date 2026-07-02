@@ -9,6 +9,14 @@ const difficultyCopy: Record<Mission["difficulty"], string> = {
   epic: "epica",
 };
 
+const categoryCopy: Record<Mission["category"], string> = {
+  social: "social",
+  photo: "foto",
+  dance: "baile",
+  emotional: "emocion",
+  funny: "humor",
+};
+
 export function MissionCard({ mission }: { mission: Mission | null }) {
   if (!mission) {
     return (
@@ -26,7 +34,7 @@ export function MissionCard({ mission }: { mission: Mission | null }) {
         {mission.points}
       </div>
       <div className="flex flex-wrap gap-2 pr-20">
-        <Badge>{mission.category}</Badge>
+        <Badge>{categoryCopy[mission.category]}</Badge>
         <Badge tone="ink">{difficultyCopy[mission.difficulty]}</Badge>
       </div>
       <h1 className="mt-5 max-w-xl font-serif text-4xl font-bold leading-tight text-tinta">{mission.title}</h1>

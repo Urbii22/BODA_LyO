@@ -1,5 +1,5 @@
 insert into weddings (slug, couple_name, title, wedding_date)
-values ('laura-oscar-2026', 'Laura y Oscar', 'La gran mision de Laura y Oscar', '2026-09-12')
+values ('luis-oscar-2026', 'Luis y Oscar', 'La gran mision de Luis y Oscar', '2026-09-12')
 on conflict (slug) do update set
   couple_name = excluded.couple_name,
   title = excluded.title,
@@ -7,10 +7,10 @@ on conflict (slug) do update set
   updated_at = now();
 
 with wedding as (
-  select id from weddings where slug = 'laura-oscar-2026'
+  select id from weddings where slug = 'luis-oscar-2026'
 ), mission_seed(title, description, points, difficulty, category) as (
   values
-    ('Foto con los novios', 'Conseguid una foto con Laura y Oscar donde vuestra mesa parezca portada de revista.', 50, 'medium', 'photo'),
+    ('Foto con los novios', 'Conseguid una foto con Luis y Oscar donde vuestra mesa parezca portada de revista.', 50, 'medium', 'photo'),
     ('Brindis creativo', 'Inventad un brindis breve, bonito y con una pizca de teatro.', 50, 'medium', 'emotional'),
     ('Alianza entre mesas', 'Firmad una alianza diplomatica con otra mesa y dejad prueba grafica del pacto.', 25, 'easy', 'social'),
     ('Coreografia expres', 'Preparad ocho segundos de baile coordinado. El glamour suma, la valentia tambien.', 75, 'hard', 'dance'),
@@ -31,7 +31,7 @@ where not exists (
 );
 
 with wedding as (
-  select id from weddings where slug = 'laura-oscar-2026'
+  select id from weddings where slug = 'luis-oscar-2026'
 ), ordered_missions as (
   select id, row_number() over (order by created_at, title) as rn
   from missions

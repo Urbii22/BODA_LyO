@@ -73,6 +73,7 @@ export async function createSubmission(
 
     try {
       await createSubmissionRecord({
+        id: submissionId,
         weddingId: wedding.id,
         tableId: table.id,
         missionId: table.mission.id,

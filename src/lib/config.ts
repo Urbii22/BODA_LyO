@@ -1,8 +1,8 @@
 export const appConfig = {
   appName: "MesaQuest",
-  coupleName: "Laura y Oscar",
-  weddingTitle: "La gran mision de Laura y Oscar",
-  weddingSlug: process.env.WEDDING_SLUG || "laura-oscar-2026",
+  coupleName: "Luis y Oscar",
+  weddingTitle: "La gran mision de Luis y Oscar",
+  weddingSlug: process.env.WEDDING_SLUG || "luis-oscar-2026",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   copy: {
     tagline: "Una boda, doce mesas y una liga secreta de recuerdos.",
