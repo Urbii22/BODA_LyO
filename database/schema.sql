@@ -50,9 +50,22 @@ create table submissions (
   updated_at       timestamptz not null default now()
 );
 
+create table push_subscriptions (
+  id             uuid primary key default gen_random_uuid(),
+  wedding_id     uuid not null references weddings(id) on delete cascade,
+  table_id       uuid not null references tables(id) on delete cascade,
+  endpoint       text not null unique,
+  subscription   jsonb not null,
+  user_agent     text,
+  created_at     timestamptz not null default now(),
+  updated_at     timestamptz not null default now(),
+  last_seen_at   timestamptz not null default now()
+);
+
 create index idx_tables_wedding_code on tables (wedding_id, code);
 create index idx_submissions_status on submissions (wedding_id, status, created_at desc);
 create index idx_submissions_table on submissions (table_id, created_at desc);
+create index idx_push_subscriptions_table on push_subscriptions (table_id, updated_at desc);
 
 create view ranking_view with (security_invoker = true) as
 select
@@ -72,4 +85,6 @@ alter table weddings enable row level security;
 alter table missions enable row level security;
 alter table tables enable row level security;
 alter table submissions enable row level security;
+alter table push_subscriptions enable row level security;
+grant select, insert, update, delete on table push_subscriptions to service_role;
 revoke all on ranking_view from anon, authenticated;

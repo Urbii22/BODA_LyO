@@ -122,6 +122,38 @@ export type Database = {
           updated_at?: string;
         }
       >;
+      push_subscriptions: TableDefinition<
+        {
+          id: string;
+          wedding_id: string;
+          table_id: string;
+          endpoint: string;
+          subscription: Json;
+          user_agent: string | null;
+          created_at: string;
+          updated_at: string;
+          last_seen_at: string;
+        },
+        {
+          id?: string;
+          wedding_id: string;
+          table_id: string;
+          endpoint: string;
+          subscription: Json;
+          user_agent?: string | null;
+          created_at?: string;
+          updated_at?: string;
+          last_seen_at?: string;
+        },
+        {
+          wedding_id?: string;
+          table_id?: string;
+          subscription?: Json;
+          user_agent?: string | null;
+          updated_at?: string;
+          last_seen_at?: string;
+        }
+      >;
     };
     Views: {
       ranking_view: {
