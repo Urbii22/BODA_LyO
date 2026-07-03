@@ -27,6 +27,7 @@ function revalidateTableViews() {
   revalidatePath("/admin/qr");
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");
+  revalidatePath("/grupo");
   revalidatePath("/mesa/[code]", "page");
   revalidatePath("/grupo/[code]", "page");
 }
