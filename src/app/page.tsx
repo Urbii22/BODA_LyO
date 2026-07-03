@@ -27,6 +27,8 @@ export default function Home() {
             </div>
           </div>
           <div className="rounded-lg border border-tinta/10 bg-white/70 p-4 shadow-[0_24px_60px_rgba(38,33,29,0.1)]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/brand/ilustracion-novios.png" alt="Luis y Oscar con su perro" className="mx-auto mb-3 h-[150px] rounded-md" />
             <div className="grid gap-3">
               {["Escanea el QR de tu mesa", "Cumple la mision secreta", "Sube foto y suma gloria"].map((step, index) => (
                 <div key={step} className="flex items-center gap-4 rounded-md bg-marfil p-4">
@@ -39,6 +41,8 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/lavanda-divider.png" alt="" className="mx-auto w-44 opacity-85" />
         <footer className="flex items-center justify-between gap-4 border-t border-tinta/10 py-4 text-sm text-tinta/55">
           <span>{appConfig.copy.tagline}</span>
           <Link href="/admin" className="hover:text-vino">Admin</Link>

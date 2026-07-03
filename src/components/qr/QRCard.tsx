@@ -17,6 +17,8 @@ export function QRCard({ table }: { table: WeddingTable }) {
 
   return (
     <Card className="break-inside-avoid text-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/brand/escudos.png" alt="" className="mx-auto mb-2 h-11" />
       <h2 className="font-serif text-2xl font-bold">{table.name}</h2>
       <p className="text-sm font-semibold text-vino">{table.code}</p>
       {qr ? (
