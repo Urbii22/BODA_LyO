@@ -23,13 +23,13 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    default: "MesaQuest",
-    template: "%s | MesaQuest",
+    default: "GrupoQuest",
+    template: "%s | GrupoQuest",
   },
-  description: "Misiones secretas por mesas para una boda con ranking en directo.",
+  description: "Misiones secretas por grupos para una boda con ranking en directo.",
   openGraph: {
-    title: "MesaQuest",
-    description: "Escanea, cumple la mision, sube la prueba y suma puntos para tu mesa.",
+    title: "GrupoQuest",
+    description: "Escanea, cumple la mision, sube la prueba y suma puntos para tu grupo.",
     type: "website",
   },
 };

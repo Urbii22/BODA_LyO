@@ -65,6 +65,7 @@ export async function reviewSubmission(formData: FormData) {
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");
   revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/grupo/[code]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/submissions");
 }
@@ -80,6 +81,7 @@ export async function deleteSubmission(formData: FormData) {
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");
   revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/grupo/[code]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/submissions");
   revalidatePath("/admin/tables");

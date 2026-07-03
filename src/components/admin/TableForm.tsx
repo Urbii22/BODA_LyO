@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef } from "react";
 import { type MissionActionState, missionInitialState } from "../../actions/mission-action-state";
 import type { Mission } from "../../lib/types/mission";
 import type { WeddingTable } from "../../lib/types/table";
+import { displayGroupCode, displayGroupName } from "../../lib/utils/group-labels";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 
@@ -36,11 +37,11 @@ export function TableForm({ action, table, missions, submitLabel, defaultDisplay
       <div className="grid gap-3 sm:grid-cols-[1.3fr_0.8fr_0.5fr]">
         <label className="grid gap-1">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Nombre</span>
-          <Input name="name" defaultValue={table?.name} placeholder="Mesa 12" required maxLength={80} />
+          <Input name="name" defaultValue={table ? displayGroupName(table.name) : undefined} placeholder="Grupo 12" required maxLength={80} />
         </label>
         <label className="grid gap-1">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Codigo QR</span>
-          <Input name="code" defaultValue={table?.code} placeholder="MESA-12" required maxLength={40} />
+          <Input name="code" defaultValue={table ? displayGroupCode(table.code) : undefined} placeholder="GRUPO-12" required maxLength={40} />
         </label>
         <label className="grid gap-1">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Orden</span>

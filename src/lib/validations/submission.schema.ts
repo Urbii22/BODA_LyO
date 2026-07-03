@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const submissionSchema = z.object({
-  tableCode: z.string().trim().min(1, "Falta el codigo de mesa."),
+  tableCode: z.string().trim().min(1, "Falta el codigo de grupo."),
   comment: z.string().trim().max(500, "El comentario no puede superar 500 caracteres.").optional(),
 });
 

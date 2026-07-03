@@ -14,7 +14,7 @@ export function NewMissionCard() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="font-serif text-3xl font-bold leading-none">Nueva mision</h2>
-          <p className="mt-1 text-sm text-graphite">Anade un reto al vuelo. Luego asignalo a una mesa abajo.</p>
+          <p className="mt-1 text-sm text-graphite">Anade un reto al vuelo. Luego asignalo a un grupo abajo.</p>
         </div>
         <Button type="button" variant={open ? "ghost" : "primary"} onClick={() => setOpen((v) => !v)}>
           {open ? "Cerrar" : "Crear mision"}

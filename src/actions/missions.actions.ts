@@ -27,6 +27,7 @@ function revalidateMissionViews() {
   revalidatePath("/admin");
   revalidatePath("/admin/missions");
   revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/grupo/[code]", "page");
 }
 
 export async function createMission(

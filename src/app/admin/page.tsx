@@ -8,6 +8,7 @@ import { getAdminStats, getLatestSubmissionForAdmin } from "../../lib/repositori
 import { getTableUsage, listTables } from "../../lib/repositories/tables.repository";
 import { getActiveWedding } from "../../lib/repositories/weddings.repository";
 import { formatDate } from "../../lib/utils/format-date";
+import { displayGroupCode, displayGroupName } from "../../lib/utils/group-labels";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +37,7 @@ export default async function AdminPage() {
   const activeMissionsWithoutTable = missions.filter((mission) => mission.isActive && !activeMissionIds.has(mission.id));
   const healthItems = [
     {
-      label: "Mesas sin mision",
+      label: "Grupos sin mision",
       value: tablesWithoutMission.length,
       href: "/admin/tables",
       ok: tablesWithoutMission.length === 0,
@@ -48,13 +49,13 @@ export default async function AdminPage() {
       ok: hiddenAssignedMissions.length === 0,
     },
     {
-      label: "Mesas sin envio",
+      label: "Grupos sin envio",
       value: tablesWithoutSubmissions.length,
       href: "/admin/tables",
       ok: tablesWithoutSubmissions.length === 0,
     },
     {
-      label: "Misiones activas sin mesa",
+      label: "Misiones activas sin grupo",
       value: activeMissionsWithoutTable.length,
       href: "/admin/missions",
       ok: activeMissionsWithoutTable.length === 0,
@@ -85,7 +86,7 @@ export default async function AdminPage() {
               <p className="mt-2 font-hand text-4xl font-bold leading-none tabular-nums sm:text-5xl">{stats.pending}</p>
             </div>
             <div className="rounded-[0.3rem] border border-marfil/20 bg-marfil/8 p-3">
-              <p className="text-xs font-bold uppercase tracking-[0.12em] text-champagne">Mesas</p>
+              <p className="text-xs font-bold uppercase tracking-[0.12em] text-champagne">Grupos</p>
               <p className="mt-2 font-hand text-4xl font-bold leading-none tabular-nums sm:text-5xl">{tables.length}</p>
             </div>
             <div className="rounded-[0.3rem] border border-marfil/20 bg-marfil/8 p-3">
@@ -102,7 +103,7 @@ export default async function AdminPage() {
           <div className="mt-5 border-t border-marfil/16 pt-4 text-sm text-marfil/82">
             {latestSubmission ? (
               <p>
-                Ultimo envio: <span className="font-bold text-marfil">{latestSubmission.tableName}</span>,{" "}
+                Ultimo envio: <span className="font-bold text-marfil">{displayGroupName(latestSubmission.tableName)}</span>,{" "}
                 {latestSubmission.missionTitle} · {formatDate(latestSubmission.createdAt)}
               </p>
             ) : (
@@ -119,7 +120,7 @@ export default async function AdminPage() {
               Revisar pendientes <span className="text-vino">{stats.pending}</span>
             </Link>
             <Link href="/admin/tables" className={actionClass}>
-              Anadir o editar mesas <span className="text-vino">{tables.length}</span>
+              Anadir o editar grupos <span className="text-vino">{tables.length}</span>
             </Link>
             <Link href="/admin/missions" className={actionClass}>
               Ajustar misiones <span className="text-vino">{missions.length}</span>
@@ -167,8 +168,8 @@ export default async function AdminPage() {
         <Card>
           <div className="flex items-center justify-between gap-3">
             <div>
-              <h2 className="font-serif text-4xl font-bold leading-none">Mesas</h2>
-              <p className="mt-1 text-sm text-graphite">{tables.length} mesas configuradas</p>
+              <h2 className="font-serif text-4xl font-bold leading-none">Grupos</h2>
+              <p className="mt-1 text-sm text-graphite">{tables.length} grupos configurados</p>
             </div>
             <div className="flex gap-3 text-sm font-bold text-vino">
               <Link href="/admin/tables">Gestionar</Link>
@@ -178,14 +179,14 @@ export default async function AdminPage() {
           <ul className="mt-4 divide-y divide-tinta/10">
             {visibleTables.map((table) => (
               <li key={table.id} className="flex justify-between gap-3 py-2 text-sm font-semibold">
-                <span>{table.name}</span>
-                <span className="font-semibold text-vino">{table.code}</span>
+                <span>{displayGroupName(table.name)}</span>
+                <span className="font-semibold text-vino">{displayGroupCode(table.code)}</span>
               </li>
             ))}
           </ul>
           {tables.length > visibleTables.length ? (
             <Link href="/admin/tables" className="mt-3 inline-flex text-sm font-bold text-vino">
-              Ver {tables.length - visibleTables.length} mesas mas
+              Ver {tables.length - visibleTables.length} grupos mas
             </Link>
           ) : null}
         </Card>

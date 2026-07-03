@@ -48,11 +48,11 @@ export async function createSubmission(
     const table = await getTableByCode(wedding.id, tableCode);
 
     if (!table) {
-      return { ok: false, message: "Mesa no encontrada. Pregunta a los novios y volvemos a intentarlo." };
+      return { ok: false, message: "Grupo no encontrado. Pregunta a los novios y volvemos a intentarlo." };
     }
 
     if (!table.mission) {
-      return { ok: false, message: "La mision de esta mesa aun esta en preparacion." };
+      return { ok: false, message: "La mision de este grupo aun esta en preparacion." };
     }
 
     const submissionId = crypto.randomUUID();
@@ -86,9 +86,10 @@ export async function createSubmission(
     }
 
     revalidatePath(`/mesa/${table.code}`);
+    revalidatePath(`/grupo/${table.code}`);
     return {
       ok: true,
-      message: "Prueba enviada. Pendiente de revision. Si se aprueba, vuestra mesa sumara puntos.",
+      message: "Prueba enviada. Pendiente de revision. Si se aprueba, vuestro grupo sumara puntos.",
     };
   } catch (error) {
     return {

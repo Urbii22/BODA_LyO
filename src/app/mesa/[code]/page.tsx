@@ -8,6 +8,7 @@ import { hasSupabaseConfig } from "../../../lib/config";
 import { listSubmissionsByTable } from "../../../lib/repositories/submissions.repository";
 import { getTableByCode } from "../../../lib/repositories/tables.repository";
 import { getActiveWedding } from "../../../lib/repositories/weddings.repository";
+import { displayGroupCode, displayGroupName } from "../../../lib/utils/group-labels";
 import { normalizeTableCode } from "../../../lib/utils/normalize-table-code";
 
 export const revalidate = 10;
@@ -22,6 +23,8 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
   if (!table) notFound();
 
   const submissions = await listSubmissionsByTable(table.id);
+  const groupName = displayGroupName(table.name);
+  const groupCode = displayGroupCode(table.code);
 
   return (
     <main className="page-shell paper-grain min-h-screen px-4 py-5">
@@ -29,8 +32,8 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
         <section className="overflow-hidden rounded-[0.35rem] border border-tinta bg-tinta p-5 text-marfil shadow-[0_18px_50px_rgba(45,42,40,0.18)]">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="hand-label text-lavanda-suave">{table.code}</p>
-              <h1 className="mt-1 font-serif text-5xl font-bold leading-none">{table.name}</h1>
+              <p className="hand-label text-lavanda-suave">{groupCode}</p>
+              <h1 className="mt-1 font-serif text-5xl font-bold leading-none">{groupName}</h1>
             </div>
             <span className="rounded-[0.25rem] border border-marfil/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-champagne">
               Sobre abierto

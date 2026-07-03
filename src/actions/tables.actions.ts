@@ -28,6 +28,7 @@ function revalidateTableViews() {
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");
   revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/grupo/[code]", "page");
 }
 
 export async function createTable(
@@ -44,7 +45,7 @@ export async function createTable(
   const wedding = await getActiveWedding();
   await createTableRecord(wedding.id, parsed.data);
   revalidateTableViews();
-  return { ok: true, message: `Mesa "${parsed.data.name}" creada.` };
+  return { ok: true, message: `Grupo "${parsed.data.name}" creado.` };
 }
 
 export async function updateTable(
@@ -54,7 +55,7 @@ export async function updateTable(
   await assertAdmin();
 
   const tableId = String(formData.get("tableId") || "");
-  if (!tableId) return { ok: false, message: "Falta la mesa." };
+  if (!tableId) return { ok: false, message: "Falta el grupo." };
 
   const parsed = readTableForm(formData);
   if (!parsed.success) {
@@ -63,7 +64,7 @@ export async function updateTable(
 
   await updateTableRecord(tableId, parsed.data);
   revalidateTableViews();
-  return { ok: true, message: "Mesa actualizada." };
+  return { ok: true, message: "Grupo actualizado." };
 }
 
 export async function deleteTable(formData: FormData) {

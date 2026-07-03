@@ -12,7 +12,7 @@ const statusCopy = {
 export function SubmissionStatusList({ submissions }: { submissions: SubmissionSummary[] }) {
   return (
     <Card>
-      <h2 className="font-serif text-4xl font-bold leading-none">Pruebas de vuestra mesa</h2>
+      <h2 className="font-serif text-4xl font-bold leading-none">Pruebas de vuestro grupo</h2>
       {submissions.length === 0 ? (
         <p className="mt-3 text-base text-graphite">Aun no hay pruebas. La primera vale doble en gloria.</p>
       ) : (

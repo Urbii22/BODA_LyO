@@ -46,7 +46,7 @@ export function MissionEditRow({ mission, usage }: Props) {
             <Badge tone="ink">{difficultyCopy[mission.difficulty]}</Badge>
             <span className="font-bold text-vino">{mission.points} pts</span>
             <span className="text-graphite">
-              {usage.tables > 0 ? `En ${usage.tables} mesa${usage.tables > 1 ? "s" : ""}` : "Sin mesa"}
+              {usage.tables > 0 ? `En ${usage.tables} grupo${usage.tables > 1 ? "s" : ""}` : "Sin grupo"}
               {usage.submissions > 0 ? ` · ${usage.submissions} prueba${usage.submissions > 1 ? "s" : ""}` : ""}
             </span>
           </div>
@@ -61,7 +61,7 @@ export function MissionEditRow({ mission, usage }: Props) {
             <Button type="submit" variant="ghost">{mission.isActive ? "Ocultar" : "Mostrar"}</Button>
           </form>
           {inUse ? (
-            <span className="self-center text-xs text-graphite" title="Reasigna la mesa o borra sus pruebas antes.">
+            <span className="self-center text-xs text-graphite" title="Reasigna el grupo o borra sus pruebas antes.">
               en uso
             </span>
           ) : (
