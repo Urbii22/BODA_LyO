@@ -37,7 +37,7 @@ export function MissionCard({ mission }: { mission: Mission | null }) {
         <Badge>{categoryCopy[mission.category]}</Badge>
         <Badge tone="ink">{difficultyCopy[mission.difficulty]}</Badge>
       </div>
-      <h1 className="mt-5 max-w-xl font-serif text-4xl font-bold leading-tight text-tinta">{mission.title}</h1>
+      <h2 className="mt-5 max-w-xl font-serif text-[32px] font-bold leading-[1.15] text-tinta">{mission.title}</h2>
       <p className="mt-4 text-base leading-7 text-tinta/74">{mission.description}</p>
     </Card>
   );

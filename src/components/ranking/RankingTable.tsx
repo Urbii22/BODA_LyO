@@ -24,7 +24,9 @@ export function RankingTable({ rows, highlightTop = false }: { rows: RankingRow[
             </div>
             <div className="min-w-0">
               <p className="truncate font-serif text-2xl font-bold">{row.tableName}</p>
-              <p className="text-sm text-tinta/55">{row.tableCode} · {row.approvedCount} aprobadas</p>
+              <p className="text-sm text-tinta/55">
+                {row.tableCode} · {row.approvedCount} aprobada{row.approvedCount === 1 ? "" : "s"}
+              </p>
             </div>
           </div>
           <Badge tone={index === 0 ? "gold" : "ink"}>{row.totalPoints} pts</Badge>

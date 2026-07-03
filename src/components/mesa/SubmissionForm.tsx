@@ -47,8 +47,12 @@ export function SubmissionForm({ tableCode }: { tableCode: string }) {
       <form action={formAction} className="mt-4 space-y-4">
         <input type="hidden" name="tableCode" value={tableCode} />
         <label className="block">
+          <span className="text-sm font-semibold">Nombre</span>
+          <Input name="participantName" maxLength={80} placeholder="Ej. Ana, primo del novio" required />
+        </label>
+        <label className="block">
           <span className="text-sm font-semibold">Comentario</span>
-          <Textarea name="comment" maxLength={500} placeholder="Opcional: explicad la jugada maestra de vuestra mesa." />
+          <Textarea name="comment" maxLength={500} placeholder="Opcional, pero los detalles dan puntos de estilo." />
         </label>
         <label className="block">
           <span className="text-sm font-semibold">Foto de la prueba</span>
