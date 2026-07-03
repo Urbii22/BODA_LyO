@@ -22,7 +22,7 @@ export default function Home() {
           <div className="mt-3 flex max-w-2xl items-center justify-between gap-6">
             <h1 className="max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
               <span className="block">Luis</span>
-              <span className="block text-[0.52em] leading-[0.7] text-lavanda">&</span>
+              <span className="block text-center text-[0.52em] leading-[0.7] text-lavanda">&</span>
               <span className="block">Oscar</span>
             </h1>
             <Image
