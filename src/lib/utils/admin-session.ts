@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 const COOKIE_NAME = "admin_session";
 const SESSION_PAYLOAD = "mesaquest-admin-v1";
 const DAY_SECONDS = 24 * 60 * 60;
+const SESSION_SECONDS = 30 * DAY_SECONDS;
 
 export async function createAdminSession() {
   const cookieStore = await cookies();
@@ -13,7 +14,7 @@ export async function createAdminSession() {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: DAY_SECONDS,
+    maxAge: SESSION_SECONDS,
     path: "/",
   });
 }
@@ -30,10 +31,10 @@ export async function isAdminSessionValid() {
   return safeCompare(value, signSession());
 }
 
-export async function verifyAdminPin(pin: string) {
-  const expected = process.env.ADMIN_PIN;
+export async function verifyAdminPassword(password: string) {
+  const expected = process.env.ADMIN_PASSWORD || process.env.ADMIN_PIN;
   if (!expected) return false;
-  return safeCompare(hash(pin), hash(expected));
+  return safeCompare(hash(password), hash(expected));
 }
 
 export async function sleepOnFailedLogin() {

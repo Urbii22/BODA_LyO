@@ -7,7 +7,7 @@ import {
   clearAdminSession,
   createAdminSession,
   sleepOnFailedLogin,
-  verifyAdminPin,
+  verifyAdminPassword,
 } from "../lib/utils/admin-session";
 import { reviewSubmission as reviewSubmissionRecord } from "../lib/repositories/submissions.repository";
 import { reviewSubmissionSchema } from "../lib/validations/submission.schema";
@@ -21,15 +21,15 @@ export async function adminLogin(
   _previousState: AdminLoginState,
   formData: FormData,
 ): Promise<AdminLoginState> {
-  const pin = String(formData.get("pin") || "");
+  const password = String(formData.get("password") || "");
 
-  if (await verifyAdminPin(pin)) {
+  if (await verifyAdminPassword(password)) {
     await createAdminSession();
     redirect("/admin");
   }
 
   await sleepOnFailedLogin();
-  return { ok: false, message: "PIN incorrecto." };
+  return { ok: false, message: "Contraseña incorrecta." };
 }
 
 export async function adminLogout() {
