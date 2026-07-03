@@ -6,16 +6,16 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variants = {
-  primary: "bg-vino text-white hover:bg-[#641f37] border-vino",
-  secondary: "bg-tinta text-marfil hover:bg-noche border-tinta",
-  danger: "bg-white text-vino hover:bg-[#fff2f5] border-vino/30",
-  ghost: "bg-transparent text-tinta hover:bg-white/60 border-tinta/15",
+  primary: "bg-tinta text-marfil hover:bg-vino border-tinta shadow-[0_8px_0_rgba(45,42,40,0.14)]",
+  secondary: "bg-oliva text-marfil hover:bg-[#5f6d50] border-oliva shadow-[0_8px_0_rgba(116,130,96,0.18)]",
+  danger: "bg-white/78 text-vino hover:bg-[#fff2f5] border-vino/35",
+  ghost: "bg-transparent text-tinta hover:bg-white/62 border-tinta/25",
 };
 
 export function Button({ children, className = "", variant = "primary", ...props }: ButtonProps) {
   return (
     <button
-      className={`inline-flex min-h-11 items-center justify-center rounded-md border px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-55 ${variants[variant]} ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center rounded-[0.35rem] border px-5 py-2.5 text-sm font-bold transition duration-200 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-55 disabled:hover:translate-y-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lavanda ${variants[variant]} ${className}`}
       {...props}
     >
       {children}

@@ -13,10 +13,11 @@ export default async function AdminQrPage() {
   const tables = await listTables(wedding.id);
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 print:max-w-none print:px-0">
+    <main className="page-shell paper-grain mx-auto max-w-5xl px-4 py-8 print:max-w-none print:px-0">
       <div className="no-print mb-6">
-        <h1 className="font-serif text-5xl font-bold">QR de mesas</h1>
-        <p className="mt-2 text-tinta/65">Imprime esta pantalla o guarda como PDF.</p>
+        <p className="hand-label text-lavanda">Sobres para repartir</p>
+        <h1 className="mt-1 font-serif text-6xl font-bold leading-none">QR de mesas</h1>
+        <p className="mt-2 text-graphite">Imprime esta pantalla o guarda como PDF.</p>
       </div>
       <QRGrid tables={tables} />
     </main>

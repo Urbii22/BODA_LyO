@@ -3,7 +3,7 @@ import { SetupNotice } from "../../../components/SetupNotice";
 import { MissionCard } from "../../../components/mesa/MissionCard";
 import { SubmissionForm } from "../../../components/mesa/SubmissionForm";
 import { SubmissionStatusList } from "../../../components/mesa/SubmissionStatusList";
-import { Card } from "../../../components/ui/Card";
+import { LavenderDivider } from "../../../components/wedding/InvitationArt";
 import { hasSupabaseConfig } from "../../../lib/config";
 import { listSubmissionsByTable } from "../../../lib/repositories/submissions.repository";
 import { getTableByCode } from "../../../lib/repositories/tables.repository";
@@ -24,12 +24,22 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
   const submissions = await listSubmissionsByTable(table.id);
 
   return (
-    <main className="min-h-screen px-4 py-6">
+    <main className="page-shell paper-grain min-h-screen px-4 py-5">
       <div className="mx-auto max-w-3xl space-y-5">
-        <Card className="bg-tinta text-marfil">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-champagne">{table.code}</p>
-          <h1 className="mt-2 font-serif text-4xl font-bold">{table.name}</h1>
-        </Card>
+        <section className="overflow-hidden rounded-[0.35rem] border border-tinta bg-tinta p-5 text-marfil shadow-[0_18px_50px_rgba(45,42,40,0.18)]">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="hand-label text-lavanda-suave">{table.code}</p>
+              <h1 className="mt-1 font-serif text-5xl font-bold leading-none">{table.name}</h1>
+            </div>
+            <span className="rounded-[0.25rem] border border-marfil/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-champagne">
+              Sobre abierto
+            </span>
+          </div>
+          <div className="mt-5 text-marfil/82">
+            <LavenderDivider label="misión secreta" />
+          </div>
+        </section>
         <MissionCard mission={table.mission} />
         <SubmissionForm tableCode={table.code} />
         <SubmissionStatusList submissions={submissions} />

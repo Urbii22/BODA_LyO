@@ -7,7 +7,7 @@ export const appConfig = {
   copy: {
     tagline: "Una boda, doce mesas y una liga secreta de recuerdos.",
     intro:
-      "Escanea el QR de tu mesa, completa vuestra mision y sube una foto como prueba. El jurado decide y el ranking se mueve durante la fiesta.",
+      "Escanead el QR de vuestra mesa, completad la mision secreta y subid una foto como prueba. El jurado decide y el ranking se mueve durante la fiesta.",
   },
 } as const;
 

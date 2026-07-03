@@ -16,10 +16,12 @@ export default async function LiveRankingPage() {
   return (
     <main className="min-h-screen bg-noche px-6 py-8 text-marfil">
       <LiveRefresh />
-      <div className="mx-auto max-w-5xl">
-        <p className="text-sm font-bold uppercase tracking-[0.22em] text-champagne">Ranking en directo</p>
-        <h1 className="mt-3 font-serif text-7xl font-bold">La liga del banquete</h1>
-        <div className="mt-10 text-tinta">
+      <div className="paper-grain mx-auto max-w-5xl rounded-[0.25rem] border border-marfil/28 bg-marfil px-5 py-7 text-tinta shadow-[0_32px_100px_rgba(0,0,0,0.42)] sm:px-8">
+        <p className="hand-label text-lavanda">Ranking en directo</p>
+        <h1 className="mt-2 text-balance font-serif text-[clamp(4rem,9vw,7.5rem)] font-bold leading-[0.86]">
+          La liga del banquete
+        </h1>
+        <div className="mt-8">
           <RankingTable rows={ranking} highlightTop />
         </div>
       </div>

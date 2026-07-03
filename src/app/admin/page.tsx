@@ -20,8 +20,9 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="font-serif text-5xl font-bold">Panel del jurado</h1>
+    <main className="page-shell paper-grain mx-auto max-w-6xl px-4 py-8">
+      <p className="hand-label text-lavanda">Zona del jurado</p>
+      <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Panel del jurado</h1>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {[
           ["Pendientes", stats.pending],
@@ -31,19 +32,19 @@ export default async function AdminPage() {
         ].map(([label, value]) => (
           <Card key={label}>
             <p className="text-sm font-bold uppercase tracking-[0.12em] text-vino">{label}</p>
-            <p className="mt-2 font-serif text-5xl font-bold">{value}</p>
+            <p className="mt-2 font-hand text-6xl font-bold leading-none tabular-nums">{value}</p>
           </Card>
         ))}
       </div>
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="font-serif text-3xl font-bold">Mesas</h2>
-            <Link href="/admin/qr" className="text-sm font-semibold text-vino">Ver QR</Link>
+            <h2 className="font-serif text-4xl font-bold leading-none">Mesas</h2>
+            <Link href="/admin/qr" className="text-sm font-bold text-vino">Ver QR</Link>
           </div>
           <ul className="mt-4 divide-y divide-tinta/10">
             {tables.map((table) => (
-              <li key={table.id} className="flex justify-between gap-3 py-2 text-sm">
+              <li key={table.id} className="flex justify-between gap-3 py-2 text-sm font-semibold">
                 <span>{table.name}</span>
                 <span className="font-semibold text-vino">{table.code}</span>
               </li>
@@ -52,8 +53,8 @@ export default async function AdminPage() {
         </Card>
         <Card>
           <div className="flex items-center justify-between gap-3">
-            <h2 className="font-serif text-3xl font-bold">Misiones</h2>
-            <Link href="/admin/submissions" className="text-sm font-semibold text-vino">Revisar</Link>
+            <h2 className="font-serif text-4xl font-bold leading-none">Misiones</h2>
+            <Link href="/admin/submissions" className="text-sm font-bold text-vino">Revisar</Link>
           </div>
           <ul className="mt-4 divide-y divide-tinta/10">
             {missions.map((mission) => (
