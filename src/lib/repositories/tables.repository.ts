@@ -63,6 +63,7 @@ export async function createTable(weddingId: string, input: TableFormInput): Pro
       code: input.code,
       name: input.name,
       display_order: input.displayOrder,
+      manual_points: input.manualPoints,
       mission_id: input.missionId,
     })
     .select("*")
@@ -97,6 +98,7 @@ export async function resolveOrCreateTableFromGroupName(
       code,
       name: groupName,
       display_order: displayOrder,
+      manual_points: 0,
       mission_id: missionId,
     })
     .select("*, missions(*)")
@@ -121,6 +123,7 @@ export async function updateTable(id: string, input: TableFormInput): Promise<We
       code: input.code,
       name: input.name,
       display_order: input.displayOrder,
+      manual_points: input.manualPoints,
       mission_id: input.missionId,
       updated_at: new Date().toISOString(),
     })
@@ -145,23 +148,45 @@ export async function deleteTable(id: string): Promise<void> {
   if (error) throw new Error(`No se pudo borrar el grupo: ${error.message}`);
 }
 
-export type TableUsage = Record<string, { submissions: number; approved: number; points: number }>;
+export type TableUsage = Record<
+  string,
+  { submissions: number; approved: number; approvedPoints: number; manualPoints: number; points: number }
+>;
 
 export async function getTableUsage(weddingId: string): Promise<TableUsage> {
-  const { data, error } = await getSupabaseAdmin()
-    .from("submissions")
-    .select("table_id, status, awarded_points")
-    .eq("wedding_id", weddingId)
-    .returns<{ table_id: string; status: "pending" | "approved" | "rejected"; awarded_points: number }[]>();
+  const [submissionsRes, tablesRes] = await Promise.all([
+    getSupabaseAdmin()
+      .from("submissions")
+      .select("table_id, status, awarded_points")
+      .eq("wedding_id", weddingId)
+      .returns<{ table_id: string; status: "pending" | "approved" | "rejected"; awarded_points: number }[]>(),
+    getSupabaseAdmin()
+      .from("tables")
+      .select("id, manual_points")
+      .eq("wedding_id", weddingId)
+      .returns<Pick<TableRow, "id" | "manual_points">[]>(),
+  ]);
 
-  if (error) throw new Error(`No se pudo calcular el uso de grupos: ${error.message}`);
+  if (submissionsRes.error) throw new Error(`No se pudo calcular el uso de grupos: ${submissionsRes.error.message}`);
+  if (tablesRes.error) throw new Error(`No se pudieron cargar los puntos manuales: ${tablesRes.error.message}`);
 
   const usage: TableUsage = {};
-  for (const row of data) {
-    usage[row.table_id] ??= { submissions: 0, approved: 0, points: 0 };
+  for (const row of tablesRes.data) {
+    usage[row.id] = {
+      submissions: 0,
+      approved: 0,
+      approvedPoints: 0,
+      manualPoints: row.manual_points,
+      points: row.manual_points,
+    };
+  }
+
+  for (const row of submissionsRes.data) {
+    usage[row.table_id] ??= { submissions: 0, approved: 0, approvedPoints: 0, manualPoints: 0, points: 0 };
     usage[row.table_id].submissions += 1;
     if (row.status === "approved") {
       usage[row.table_id].approved += 1;
+      usage[row.table_id].approvedPoints += row.awarded_points;
       usage[row.table_id].points += row.awarded_points;
     }
   }

@@ -16,6 +16,7 @@ function readTableForm(formData: FormData) {
     name: formData.get("name"),
     code: formData.get("code"),
     displayOrder: formData.get("displayOrder"),
+    manualPoints: formData.get("manualPoints"),
     missionId: formData.get("missionId") || undefined,
   });
 }

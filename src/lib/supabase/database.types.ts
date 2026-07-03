@@ -68,6 +68,7 @@ export type Database = {
           code: string;
           name: string;
           display_order: number;
+          manual_points: number;
           mission_id: string | null;
           created_at: string;
           updated_at: string;
@@ -78,6 +79,7 @@ export type Database = {
           code: string;
           name: string;
           display_order?: number;
+          manual_points?: number;
           mission_id?: string | null;
           created_at?: string;
           updated_at?: string;
@@ -163,6 +165,7 @@ export type Database = {
           table_name: string;
           table_code: string;
           display_order: number;
+          manual_points: number;
           total_points: number;
           approved_count: number;
           first_approved_at: string | null;
