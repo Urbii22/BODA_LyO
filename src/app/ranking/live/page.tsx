@@ -18,7 +18,11 @@ export default async function LiveRankingPage() {
       <LiveRefresh />
       <div className="mx-auto max-w-5xl">
         <p className="text-sm font-bold uppercase tracking-[0.22em] text-champagne">Ranking en directo</p>
-        <h1 className="mt-3 font-serif text-7xl font-bold">La liga del banquete</h1>
+        <div className="mt-3 flex flex-wrap items-center gap-4 sm:gap-5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/escudos.png" alt="" className="h-12 sm:h-14" />
+          <h1 className="font-serif text-5xl font-bold leading-none sm:text-7xl">La liga del banquete</h1>
+        </div>
         <div className="mt-10 text-tinta">
           <RankingTable rows={ranking} highlightTop />
         </div>
