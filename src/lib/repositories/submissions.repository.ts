@@ -90,6 +90,41 @@ export async function listSubmissionsForAdmin(
   );
 }
 
+export type LatestSubmissionForAdmin = {
+  id: string;
+  status: SubmissionStatus;
+  createdAt: string;
+  tableName: string;
+  missionTitle: string;
+};
+
+export async function getLatestSubmissionForAdmin(weddingId: string): Promise<LatestSubmissionForAdmin | null> {
+  const { data, error } = await getSupabaseAdmin()
+    .from("submissions")
+    .select("id, status, created_at, tables(name), missions(title)")
+    .eq("wedding_id", weddingId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle<{
+      id: string;
+      status: SubmissionStatus;
+      created_at: string;
+      tables: { name: string } | null;
+      missions: { title: string } | null;
+    }>();
+
+  if (error) throw new Error(`No se pudo cargar el ultimo envio: ${error.message}`);
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    status: data.status,
+    createdAt: data.created_at,
+    tableName: data.tables?.name ?? "Mesa sin nombre",
+    missionTitle: data.missions?.title ?? "Mision sin titulo",
+  };
+}
+
 export async function reviewSubmission(
   id: string,
   verdict: SubmissionStatus,
