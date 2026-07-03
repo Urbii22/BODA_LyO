@@ -9,6 +9,7 @@ export function AdminNav() {
       <div className="flex flex-wrap gap-2 text-sm font-semibold">
         <Link className="rounded-[0.3rem] px-3 py-2 hover:bg-white/70" href="/admin">Panel</Link>
         <Link className="rounded-[0.3rem] px-3 py-2 hover:bg-white/70" href="/admin/submissions">Pruebas</Link>
+        <Link className="rounded-[0.3rem] px-3 py-2 hover:bg-white/70" href="/admin/missions">Misiones</Link>
         <Link className="rounded-[0.3rem] px-3 py-2 hover:bg-white/70" href="/admin/qr">QR</Link>
         <form action={adminLogout}>
           <Button type="submit" variant="ghost">Salir</Button>

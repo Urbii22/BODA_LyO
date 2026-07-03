@@ -24,6 +24,15 @@ export async function getTableByCode(weddingId: string, code: string): Promise<T
   return { ...mapTable(data), mission };
 }
 
+export async function setTableMission(tableId: string, missionId: string | null): Promise<void> {
+  const { error } = await getSupabaseAdmin()
+    .from("tables")
+    .update({ mission_id: missionId, updated_at: new Date().toISOString() })
+    .eq("id", tableId);
+
+  if (error) throw new Error(`No se pudo asignar la mision: ${error.message}`);
+}
+
 export async function listTables(weddingId: string): Promise<WeddingTable[]> {
   const { data, error } = await getSupabaseAdmin()
     .from("tables")

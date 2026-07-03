@@ -54,7 +54,7 @@ export default async function AdminPage() {
         <Card>
           <div className="flex items-center justify-between gap-3">
             <h2 className="font-serif text-4xl font-bold leading-none">Misiones</h2>
-            <Link href="/admin/submissions" className="text-sm font-bold text-vino">Revisar</Link>
+            <Link href="/admin/missions" className="text-sm font-bold text-vino">Gestionar</Link>
           </div>
           <ul className="mt-4 divide-y divide-tinta/10">
             {missions.map((mission) => (
