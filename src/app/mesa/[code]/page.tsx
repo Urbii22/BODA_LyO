@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SetupNotice } from "../../../components/SetupNotice";
 import { MissionCard } from "../../../components/mesa/MissionCard";
+import { PushNotificationCard } from "../../../components/mesa/PushNotificationCard";
 import { SubmissionForm } from "../../../components/mesa/SubmissionForm";
 import { SubmissionStatusList } from "../../../components/mesa/SubmissionStatusList";
 import { LavenderDivider } from "../../../components/wedding/InvitationArt";
@@ -49,6 +50,7 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
             <LavenderDivider label="misión secreta" />
           </div>
         </section>
+        <PushNotificationCard tableCode={groupCode} />
         <MissionCard mission={table.mission} />
         <SubmissionForm tableCode={table.code} />
         <SubmissionStatusList submissions={submissions} />
