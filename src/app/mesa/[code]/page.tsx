@@ -33,6 +33,8 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
         <MissionCard mission={table.mission} />
         <SubmissionForm tableCode={table.code} />
         <SubmissionStatusList submissions={submissions} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/brand/lavanda-divider.png" alt="" className="mx-auto w-44 opacity-85" />
       </div>
     </main>
   );
