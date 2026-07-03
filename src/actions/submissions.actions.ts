@@ -22,7 +22,6 @@ export async function createSubmission(
 ): Promise<SubmissionActionState> {
   const parsed = submissionSchema.safeParse({
     tableCode: formData.get("tableCode"),
-    participantName: formData.get("participantName"),
     comment: formData.get("comment") || undefined,
   });
 
@@ -77,7 +76,7 @@ export async function createSubmission(
         weddingId: wedding.id,
         tableId: table.id,
         missionId: table.mission.id,
-        participantName: parsed.data.participantName,
+        participantName: table.name,
         comment: parsed.data.comment,
         mediaPath,
       });

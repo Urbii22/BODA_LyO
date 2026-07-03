@@ -21,7 +21,7 @@ export function SubmissionStatusList({ submissions }: { submissions: SubmissionS
             <li key={submission.id} className="rounded-md border border-tinta/10 bg-marfil/70 p-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-semibold">{submission.participantName}</p>
+                  <p className="font-semibold">Prueba enviada</p>
                   <p className="text-xs text-tinta/55">{formatDate(submission.createdAt)}</p>
                 </div>
                 <Badge tone={statusCopy[submission.status].tone}>{statusCopy[submission.status].label}</Badge>

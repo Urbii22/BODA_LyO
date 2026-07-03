@@ -25,7 +25,7 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={submission.signedMediaUrl}
-          alt={`Prueba enviada por ${submission.participantName}`}
+          alt={`Prueba enviada por ${submission.table.name}`}
           className="h-72 w-full rounded-md object-cover lg:h-full"
         />
       ) : (
@@ -37,7 +37,7 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
             <p className="text-sm font-bold uppercase tracking-[0.12em] text-vino">{submission.table.name}</p>
             <h2 className="font-serif text-3xl font-bold">{submission.mission.title}</h2>
             <p className="mt-1 text-sm text-tinta/60">
-              {submission.participantName} · {formatDate(submission.createdAt)}
+              Enviada por {submission.table.name} · {formatDate(submission.createdAt)}
             </p>
           </div>
           <Badge tone={statusTone[submission.status]}>{statusCopy[submission.status]}</Badge>
