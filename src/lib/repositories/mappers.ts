@@ -3,6 +3,7 @@ import type { RankingRow } from "../types/ranking";
 import type { Submission, SubmissionStatus } from "../types/submission";
 import type { WeddingTable } from "../types/table";
 import type { Wedding } from "../types/wedding";
+import { parseStoredSubmissionMode } from "../utils/submission-mode";
 
 type WeddingRow = {
   id: string;
@@ -110,13 +111,16 @@ export function mapTable(row: TableRow): WeddingTable {
 }
 
 export function mapSubmission(row: SubmissionRow): Submission {
+  const parsedComment = parseStoredSubmissionMode(row.comment);
+
   return {
     id: row.id,
     weddingId: row.wedding_id,
     tableId: row.table_id,
     missionId: row.mission_id,
     participantName: row.participant_name,
-    comment: row.comment,
+    comment: parsedComment.comment,
+    mode: parsedComment.mode,
     mediaPath: row.media_path,
     status: row.status,
     awardedPoints: row.awarded_points,

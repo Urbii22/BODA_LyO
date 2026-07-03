@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { SetupNotice } from "../../../components/SetupNotice";
-import { MissionCard } from "../../../components/mesa/MissionCard";
-import { SubmissionForm } from "../../../components/mesa/SubmissionForm";
+import { MesaMissionFlow } from "../../../components/mesa/MesaMissionFlow";
 import { SubmissionStatusList } from "../../../components/mesa/SubmissionStatusList";
 import { LavenderDivider } from "../../../components/wedding/InvitationArt";
 import { hasSupabaseConfig } from "../../../lib/config";
@@ -10,9 +9,11 @@ import { getTableByCode } from "../../../lib/repositories/tables.repository";
 import { getActiveWedding } from "../../../lib/repositories/weddings.repository";
 import { normalizeTableCode } from "../../../lib/utils/normalize-table-code";
 
-export const revalidate = 10;
+type MesaPageProps = {
+  params: Promise<{ code: string }>;
+};
 
-export default async function MesaPage({ params }: { params: Promise<{ code: string }> }) {
+export default async function MesaPage({ params }: MesaPageProps) {
   if (!hasSupabaseConfig()) return <SetupNotice />;
 
   const { code } = await params;
@@ -37,11 +38,10 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
             </span>
           </div>
           <div className="mt-5 text-marfil/82">
-            <LavenderDivider label="misión secreta" />
+            <LavenderDivider label="mision secreta" />
           </div>
         </section>
-        <MissionCard mission={table.mission} />
-        <SubmissionForm tableCode={table.code} />
+        <MesaMissionFlow mission={table.mission} tableCode={table.code} />
         <SubmissionStatusList submissions={submissions} />
       </div>
     </main>
