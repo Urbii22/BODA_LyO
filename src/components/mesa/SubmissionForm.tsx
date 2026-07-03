@@ -2,7 +2,14 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { createSubmission, type SubmissionActionState } from "../../actions/submissions.actions";
+import type { Mission } from "../../lib/types/mission";
 import { compressImage } from "../../lib/utils/compress-image";
+import {
+  calculateSubmissionPoints,
+  getSubmissionModeLabel,
+  getSubmissionModeShortLabel,
+  type SubmissionMode,
+} from "../../lib/utils/submission-mode";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { Input } from "../ui/Input";
@@ -10,13 +17,22 @@ import { Textarea } from "../ui/Textarea";
 
 const initialState: SubmissionActionState = { ok: false, message: "" };
 
-export function SubmissionForm({ tableCode }: { tableCode: string }) {
+export function SubmissionForm({
+  tableCode,
+  mode,
+  mission,
+}: {
+  tableCode: string;
+  mode: SubmissionMode;
+  mission: Mission | null;
+}) {
   const [state, formAction, isPending] = useActionState(createSubmission, initialState);
   const [preview, setPreview] = useState<string>("");
   const [fileError, setFileError] = useState<string>("");
   const [isCompressing, setIsCompressing] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const points = mission ? calculateSubmissionPoints(mission.points, mode) : 0;
 
   useEffect(() => {
     if (!state.ok) return;
@@ -70,6 +86,7 @@ export function SubmissionForm({ tableCode }: { tableCode: string }) {
 
       <form action={formAction} className="mt-4 space-y-4">
         <input type="hidden" name="tableCode" value={tableCode} />
+        <input type="hidden" name="submissionMode" value={mode} />
         <label className="block cursor-pointer rounded-md border-2 border-dashed border-vino/35 bg-marfil px-4 py-5 text-center transition hover:bg-white">
           <input
             ref={fileInputRef}
@@ -85,7 +102,8 @@ export function SubmissionForm({ tableCode }: { tableCode: string }) {
             {preview ? "Cambiar foto" : state.ok ? "Enviar otra foto" : "Hacer foto"}
           </span>
           <span className="mt-2 block text-sm font-semibold text-tinta/65">
-            La prepararemos para subir rapido.
+            {getSubmissionModeLabel(mode)} - {points > 0 ? `${points} pts ` : ""}
+            {getSubmissionModeShortLabel(mode)}
           </span>
         </label>
 
@@ -116,7 +134,7 @@ export function SubmissionForm({ tableCode }: { tableCode: string }) {
             </label>
             <label className="block">
               <span className="text-sm font-semibold">Comentario</span>
-              <Textarea name="comment" maxLength={500} placeholder="Opcional. Una frase y a seguir bailando." />
+              <Textarea name="comment" maxLength={450} placeholder="Opcional. Una frase y a seguir bailando." />
             </label>
           </div>
         ) : null}

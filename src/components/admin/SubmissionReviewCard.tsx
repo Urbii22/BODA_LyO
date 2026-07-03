@@ -1,6 +1,7 @@
 import { reviewSubmission } from "../../actions/admin.actions";
 import type { SubmissionWithRelations } from "../../lib/types/submission";
 import { formatDate } from "../../lib/utils/format-date";
+import { calculateSubmissionPoints, getSubmissionModeLabel, getSubmissionModeShortLabel } from "../../lib/utils/submission-mode";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -19,6 +20,8 @@ const statusCopy = {
 };
 
 export function SubmissionReviewCard({ submission }: { submission: SubmissionWithRelations }) {
+  const defaultPoints = calculateSubmissionPoints(submission.mission.points, submission.mode);
+
   return (
     <Card className="grid gap-4 lg:grid-cols-[280px_1fr]">
       {submission.signedMediaUrl ? (
@@ -42,13 +45,18 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
           </div>
           <Badge tone={statusTone[submission.status]}>{statusCopy[submission.status]}</Badge>
         </div>
+        <div className="mt-3 flex flex-wrap gap-2">
+          <Badge tone={submission.mode === "bold" ? "red" : "green"}>
+            {getSubmissionModeLabel(submission.mode)} {getSubmissionModeShortLabel(submission.mode)}
+          </Badge>
+        </div>
         {submission.comment ? <p className="mt-4 rounded-md bg-marfil p-3 text-sm text-tinta/75">{submission.comment}</p> : null}
         <form action={reviewSubmission} className="mt-5 grid gap-3">
           <input type="hidden" name="submissionId" value={submission.id} />
           <div className="grid gap-3 sm:grid-cols-2">
             <label>
               <span className="text-sm font-semibold">Puntos</span>
-              <Input name="awardedPoints" type="number" min={0} placeholder={String(submission.mission.points)} />
+              <Input name="awardedPoints" type="number" min={0} placeholder={String(defaultPoints)} />
             </label>
             <label>
               <span className="text-sm font-semibold">Nota admin</span>
@@ -56,7 +64,7 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
             </label>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Button name="verdict" value="approved" type="submit">Aprobar</Button>
+            <Button name="verdict" value="approved" type="submit">Aprobar +{defaultPoints}</Button>
             <Button name="verdict" value="rejected" type="submit" variant="danger">Rechazar</Button>
             <Button name="verdict" value="pending" type="submit" variant="ghost">Volver a pendiente</Button>
           </div>

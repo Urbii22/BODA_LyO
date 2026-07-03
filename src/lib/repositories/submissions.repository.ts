@@ -6,6 +6,7 @@ import type {
   SubmissionSummary,
   SubmissionWithRelations,
 } from "../types/submission";
+import { calculateSubmissionPoints, parseStoredSubmissionMode, storeSubmissionMode } from "../utils/submission-mode";
 import { mapMission, mapSubmission, mapTable, type MissionRow, type SubmissionRow, type TableRow } from "./mappers";
 
 type SubmissionWithRelationsRow = SubmissionRow & {
@@ -22,7 +23,7 @@ export async function createSubmission(input: NewSubmission): Promise<Submission
       table_id: input.tableId,
       mission_id: input.missionId,
       participant_name: input.participantName,
-      comment: input.comment || null,
+      comment: storeSubmissionMode(input.comment, input.mode) || null,
       media_path: input.mediaPath,
     })
     .select("*")
@@ -47,15 +48,20 @@ export async function listSubmissionsByTable(tableId: string): Promise<Submissio
 
   if (error) throw new Error(`No se pudieron cargar los envios: ${error.message}`);
 
-  return data.map((row) => ({
-    id: row.id,
-    participantName: row.participant_name,
-    comment: row.comment,
-    status: row.status,
-    awardedPoints: row.awarded_points,
-    createdAt: row.created_at,
-    reviewedAt: row.reviewed_at,
-  }));
+  return data.map((row) => {
+    const parsedComment = parseStoredSubmissionMode(row.comment);
+
+    return {
+      id: row.id,
+      participantName: row.participant_name,
+      comment: parsedComment.comment,
+      mode: parsedComment.mode,
+      status: row.status,
+      awardedPoints: row.awarded_points,
+      createdAt: row.created_at,
+      reviewedAt: row.reviewed_at,
+    };
+  });
 }
 
 export async function listSubmissionsForAdmin(
@@ -98,14 +104,16 @@ export async function reviewSubmission(
 ): Promise<void> {
   const { data: current, error: currentError } = await getSupabaseAdmin()
     .from("submissions")
-    .select("id, missions(points)")
+    .select("id, comment, missions(points)")
     .eq("id", id)
-    .single<{ id: string; missions: { points: number } | null }>();
+    .single<{ id: string; comment: string | null; missions: { points: number } | null }>();
 
   if (currentError) throw new Error(`No se pudo cargar el envio: ${currentError.message}`);
 
+  const mode = parseStoredSubmissionMode(current.comment).mode;
+  const defaultPoints = calculateSubmissionPoints(current.missions?.points ?? 0, mode);
   const points =
-    verdict === "approved" ? (awardedPoints ?? current.missions?.points ?? 0) : 0;
+    verdict === "approved" ? (awardedPoints ?? defaultPoints) : 0;
 
   const { error } = await getSupabaseAdmin()
     .from("submissions")

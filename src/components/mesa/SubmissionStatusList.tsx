@@ -1,5 +1,6 @@
 import type { SubmissionSummary } from "../../lib/types/submission";
 import { formatDate } from "../../lib/utils/format-date";
+import { getSubmissionModeShortLabel } from "../../lib/utils/submission-mode";
 import { Badge } from "../ui/Badge";
 import { Card } from "../ui/Card";
 
@@ -26,6 +27,11 @@ export function SubmissionStatusList({ submissions }: { submissions: SubmissionS
                 </div>
                 <Badge tone={statusCopy[submission.status].tone}>{statusCopy[submission.status].label}</Badge>
               </div>
+              {submission.mode === "bold" ? (
+                <p className="mt-2 text-xs font-bold uppercase tracking-[0.12em] text-vino">
+                  Sin verguenza - {getSubmissionModeShortLabel(submission.mode)}
+                </p>
+              ) : null}
               {submission.comment ? <p className="mt-2 text-sm text-tinta/70">{submission.comment}</p> : null}
             </li>
           ))}

@@ -22,6 +22,7 @@ export async function createSubmission(
 ): Promise<SubmissionActionState> {
   const parsed = submissionSchema.safeParse({
     tableCode: formData.get("tableCode"),
+    submissionMode: formData.get("submissionMode") || undefined,
     participantName: formData.get("participantName") || undefined,
     comment: formData.get("comment") || undefined,
   });
@@ -79,6 +80,7 @@ export async function createSubmission(
         tableId: table.id,
         missionId: table.mission.id,
         participantName,
+        mode: parsed.data.submissionMode,
         comment: parsed.data.comment,
         mediaPath,
       });

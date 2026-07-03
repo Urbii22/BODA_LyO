@@ -10,18 +10,18 @@ with wedding as (
   select id from weddings where slug = 'luis-oscar-2026'
 ), mission_seed(slot, title, description, points, difficulty, category) as (
   values
-    (1, 'Paparazzi sin verguenza', 'Sacad una foto con Luis y Oscar como si fueran celebrities y vuestra mesa la prensa mas pesada.', 50, 'medium', 'photo'),
-    (2, 'Brindis que sube el volumen', 'Foto de brindis dramatica: brazos arriba, cara de discurso historico y cero timidez.', 50, 'medium', 'emotional'),
-    (3, 'Alianza sospechosa', 'Haced una foto pactando con otra mesa: apreton de manos, servilleta firmada o mirada de mafia elegante.', 25, 'easy', 'social'),
-    (4, 'Coreografia sin dignidad', 'Montad una pose final de baile como si acabarais de ganar Eurovision. La foto debe parecer el ultimo segundo del show.', 75, 'hard', 'dance'),
-    (5, 'Telenovela de sobremesa', 'Recread una escena de celos, traicion o herencia millonaria con lo que haya en la mesa.', 50, 'medium', 'funny'),
-    (6, 'Consejo no apto para suegras', 'Conseguid un consejo matrimonial picante pero elegante y fotografiad al sabio que lo diga.', 50, 'medium', 'emotional'),
-    (7, 'Guardaespaldas intensitos', 'Escoltad a Luis u Oscar, o a su copa si estan ocupados, con pose seria y cero contexto.', 50, 'medium', 'funny'),
-    (8, 'Mesa en modo diva', 'Foto de grupo como portada de disco: una diva central, secundarios dramaticos y actitud de gira mundial.', 25, 'easy', 'funny'),
-    (9, 'Dos generaciones, cero verguenza', 'Juntad a alguien joven y alguien veterano en una pose de baile que nadie pueda desver.', 75, 'hard', 'dance'),
-    (10, 'Caceria de secreto', 'Encontrad a alguien con una anecdota de los novios y sacad foto del momento de confesion.', 50, 'medium', 'social'),
-    (11, 'Beso de pelicula voluntario', 'Recread un beso o casi-beso de poster romantico. Solo voluntarios y cero presion.', 25, 'easy', 'photo'),
-    (12, 'Caos elegante', 'Montad la foto mas absurda y glamurosa de la noche sin romper nada ni molestar al personal.', 100, 'epic', 'funny')
+    (1, 'Foto con los novios', 'Conseguid una foto con Luis y Oscar donde vuestra mesa parezca portada de revista.', 50, 'medium', 'photo'),
+    (2, 'Brindis creativo', 'Haced una foto de brindis breve, bonito y con una pizca de teatro.', 50, 'medium', 'emotional'),
+    (3, 'Alianza entre mesas', 'Sacad una foto con otra mesa para sellar una alianza durante el banquete.', 25, 'easy', 'social'),
+    (4, 'Coreografia expres', 'Preparad una pose final de baile coordinado. El glamour suma, la valentia tambien.', 75, 'hard', 'dance'),
+    (5, 'Portada de pelicula', 'Recread el poster de una pelicula con los recursos que tengais en la mesa.', 50, 'medium', 'funny'),
+    (6, 'Consejo matrimonial', 'Conseguid un consejo matrimonial digno de pasar a la historia familiar.', 50, 'medium', 'emotional'),
+    (7, 'Guardaespaldas de los novios', 'Proteged a los novios con pose seria y maxima solemnidad absurda.', 50, 'medium', 'funny'),
+    (8, 'Mesa legendaria', 'Demostrad por que vuestra mesa merece entrar en las leyendas del banquete.', 25, 'easy', 'funny'),
+    (9, 'Generaciones en pista', 'Juntad dos generaciones en una misma prueba de baile o pose de pista.', 75, 'hard', 'dance'),
+    (10, 'Anecdota secreta', 'Conseguid una anecdota tierna o divertida sobre los novios y documentad el momento.', 50, 'medium', 'social'),
+    (11, 'Foto real', 'Haced una foto espontanea que capture la boda tal como se recordara.', 25, 'easy', 'photo'),
+    (12, 'Momento epico', 'Cread el momento mas inesperado, elegante y memorable de la noche.', 100, 'epic', 'funny')
 ), existing_missions as (
   select id, row_number() over (order by created_at, title) as slot
   from missions
@@ -52,18 +52,18 @@ with wedding as (
   select id from weddings where slug = 'luis-oscar-2026'
 ), mission_seed(slot, title) as (
   values
-    (1, 'Paparazzi sin verguenza'),
-    (2, 'Brindis que sube el volumen'),
-    (3, 'Alianza sospechosa'),
-    (4, 'Coreografia sin dignidad'),
-    (5, 'Telenovela de sobremesa'),
-    (6, 'Consejo no apto para suegras'),
-    (7, 'Guardaespaldas intensitos'),
-    (8, 'Mesa en modo diva'),
-    (9, 'Dos generaciones, cero verguenza'),
-    (10, 'Caceria de secreto'),
-    (11, 'Beso de pelicula voluntario'),
-    (12, 'Caos elegante')
+    (1, 'Foto con los novios'),
+    (2, 'Brindis creativo'),
+    (3, 'Alianza entre mesas'),
+    (4, 'Coreografia expres'),
+    (5, 'Portada de pelicula'),
+    (6, 'Consejo matrimonial'),
+    (7, 'Guardaespaldas de los novios'),
+    (8, 'Mesa legendaria'),
+    (9, 'Generaciones en pista'),
+    (10, 'Anecdota secreta'),
+    (11, 'Foto real'),
+    (12, 'Momento epico')
 ), mission_assignments as (
   select distinct on (mission_seed.slot) mission_seed.slot, missions.id
   from wedding

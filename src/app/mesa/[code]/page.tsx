@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { SetupNotice } from "../../../components/SetupNotice";
-import { MissionCard } from "../../../components/mesa/MissionCard";
-import { SubmissionForm } from "../../../components/mesa/SubmissionForm";
+import { MesaMissionFlow } from "../../../components/mesa/MesaMissionFlow";
 import { SubmissionStatusList } from "../../../components/mesa/SubmissionStatusList";
 import { appConfig, hasSupabaseConfig } from "../../../lib/config";
 import { listSubmissionsByTable } from "../../../lib/repositories/submissions.repository";
@@ -36,8 +35,7 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
           <p className="text-sm font-bold uppercase tracking-[0.12em] text-vino">{table.code}</p>
           <h1 className="mt-1 font-serif text-4xl font-bold">{table.name}</h1>
         </div>
-        <MissionCard mission={table.mission} />
-        <SubmissionForm tableCode={table.code} />
+        <MesaMissionFlow mission={table.mission} tableCode={table.code} />
         {submissions.length > 0 ? <SubmissionStatusList submissions={submissions} /> : null}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/brand/lavanda-divider.png" alt="" className="mx-auto mt-1 w-[170px] opacity-85" />
