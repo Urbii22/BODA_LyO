@@ -25,8 +25,8 @@ export function RankingTable({ rows, highlightTop = false }: { rows: RankingRow[
           }`}
         >
           <div className="flex min-w-0 items-center gap-4">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-[0.3rem] border border-tinta/30 bg-tinta font-hand text-3xl font-bold leading-none text-marfil tabular-nums">
-              <span className="-translate-y-[0.06em]">{index + 1}</span>
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-[0.3rem] border border-tinta/30 bg-tinta font-serif text-2xl font-bold leading-none text-marfil lining-nums tabular-nums">
+              <span className="translate-y-[0.08em]">{index + 1}</span>
             </div>
             <div className="min-w-0">
               <p className="truncate font-serif text-3xl font-bold leading-none">{row.tableName}</p>
