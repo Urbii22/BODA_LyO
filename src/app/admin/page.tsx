@@ -40,7 +40,10 @@ export default async function AdminPage() {
         <Card>
           <div className="flex items-center justify-between gap-3">
             <h2 className="font-serif text-4xl font-bold leading-none">Mesas</h2>
-            <Link href="/admin/qr" className="text-sm font-bold text-vino">Ver QR</Link>
+            <div className="flex gap-3 text-sm font-bold text-vino">
+              <Link href="/admin/tables">Gestionar</Link>
+              <Link href="/admin/qr">Ver QR</Link>
+            </div>
           </div>
           <ul className="mt-4 divide-y divide-tinta/10">
             {tables.map((table) => (

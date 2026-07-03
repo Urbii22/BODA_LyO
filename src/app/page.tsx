@@ -1,12 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
-import { appConfig } from "../lib/config";
+import { appConfig, hasSupabaseConfig } from "../lib/config";
 import { Button } from "../components/ui/Button";
 import { LavenderDivider } from "../components/wedding/InvitationArt";
+import { getActiveWedding } from "../lib/repositories/weddings.repository";
 
 export const revalidate = 10;
 
-export default function Home() {
+function splitCoupleName(coupleName: string) {
+  const parts = coupleName.split(/\s+y\s+/i);
+  if (parts.length >= 2) return [parts[0], parts.slice(1).join(" y ")] as const;
+  return [coupleName, ""] as const;
+}
+
+export default async function Home() {
+  const wedding = hasSupabaseConfig() ? await getActiveWedding() : null;
+  const coupleName = wedding?.coupleName ?? appConfig.coupleName;
+  const [firstName, secondName] = splitCoupleName(coupleName);
+
   return (
     <main className="page-shell paper-grain min-h-screen px-4 py-5 sm:px-6">
       <section className="mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-6xl flex-col">
@@ -21,9 +32,13 @@ export default function Home() {
           <p className="hand-label text-lavanda">Mision de boda</p>
           <div className="mt-3 flex max-w-2xl items-center justify-between gap-6">
             <h1 className="max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
-              <span className="block">Luis</span>
-              <span className="block text-center text-[0.52em] leading-[0.7] text-lavanda">&</span>
-              <span className="block">Oscar</span>
+              <span className="block">{firstName}</span>
+              {secondName ? (
+                <>
+                  <span className="block text-center text-[0.52em] leading-[0.7] text-lavanda">&</span>
+                  <span className="block">{secondName}</span>
+                </>
+              ) : null}
             </h1>
             <Image
               src="/brand/ilustracion-novios.png"

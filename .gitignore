@@ -42,3 +42,10 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# local Codex / verification artifacts
+.codex-deploy-main/
+.codex-remote-attachments/
+.playwright-cli/
+output/
+*.log

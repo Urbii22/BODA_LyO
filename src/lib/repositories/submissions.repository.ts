@@ -121,6 +121,25 @@ export async function reviewSubmission(
   if (error) throw new Error(`No se pudo revisar el envio: ${error.message}`);
 }
 
+export async function deleteSubmission(id: string): Promise<void> {
+  const admin = getSupabaseAdmin();
+  const { data, error: readError } = await admin
+    .from("submissions")
+    .select("media_path")
+    .eq("id", id)
+    .single<{ media_path: string }>();
+
+  if (readError) throw new Error(`No se pudo cargar el envio: ${readError.message}`);
+
+  const { error: deleteError } = await admin.from("submissions").delete().eq("id", id);
+  if (deleteError) throw new Error(`No se pudo borrar el envio: ${deleteError.message}`);
+
+  if (data.media_path) {
+    const { error: storageError } = await admin.storage.from("submissions").remove([data.media_path]);
+    if (storageError) throw new Error(`El envio se borro, pero no la foto: ${storageError.message}`);
+  }
+}
+
 export async function getAdminStats(weddingId: string): Promise<{
   pending: number;
   approved: number;

@@ -9,7 +9,10 @@ import {
   sleepOnFailedLogin,
   verifyAdminPassword,
 } from "../lib/utils/admin-session";
-import { reviewSubmission as reviewSubmissionRecord } from "../lib/repositories/submissions.repository";
+import {
+  deleteSubmission as deleteSubmissionRecord,
+  reviewSubmission as reviewSubmissionRecord,
+} from "../lib/repositories/submissions.repository";
 import { reviewSubmissionSchema } from "../lib/validations/submission.schema";
 
 export type AdminLoginState = {
@@ -64,4 +67,20 @@ export async function reviewSubmission(formData: FormData) {
   revalidatePath("/mesa/[code]", "page");
   revalidatePath("/admin");
   revalidatePath("/admin/submissions");
+}
+
+export async function deleteSubmission(formData: FormData) {
+  await assertAdmin();
+
+  const submissionId = String(formData.get("submissionId") || "");
+  if (!submissionId) throw new Error("Falta el envio.");
+
+  await deleteSubmissionRecord(submissionId);
+
+  revalidatePath("/ranking");
+  revalidatePath("/ranking/live");
+  revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/admin");
+  revalidatePath("/admin/submissions");
+  revalidatePath("/admin/tables");
 }
