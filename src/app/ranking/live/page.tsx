@@ -1,8 +1,7 @@
-import Link from "next/link";
 import { LiveRefresh } from "../../../components/ranking/LiveRefresh";
 import { RankingTable } from "../../../components/ranking/RankingTable";
 import { SetupNotice } from "../../../components/SetupNotice";
-import { appConfig, hasSupabaseConfig } from "../../../lib/config";
+import { hasSupabaseConfig } from "../../../lib/config";
 import { getRanking } from "../../../lib/repositories/ranking.repository";
 import { getActiveWedding } from "../../../lib/repositories/weddings.repository";
 
@@ -15,26 +14,16 @@ export default async function LiveRankingPage() {
   const ranking = (await getRanking(wedding.id)).slice(0, 5);
 
   return (
-    <main className="paper-grain min-h-screen px-4 py-6">
+    <main className="min-h-screen bg-noche px-6 py-8 text-marfil">
       <LiveRefresh />
-      <div className="mx-auto w-[calc(100vw-32px)] max-w-[640px]">
-        <nav className="flex items-center justify-between gap-4">
-          <Link href="/" className="font-serif text-2xl font-bold text-vino">{appConfig.appName}</Link>
-          <Link href="/ranking" className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-white/70">
-            Ranking
-          </Link>
-        </nav>
-        <p className="mt-5 text-sm font-bold uppercase tracking-[0.24em] text-oro-viejo">Ranking en directo</p>
-        <div className="mt-3 flex flex-wrap items-center gap-4 sm:gap-5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/escudos.png" alt="" className="h-12 sm:h-14" />
-          <h1 className="font-serif text-5xl font-bold leading-none">La liga del banquete</h1>
-        </div>
-        <div className="mt-5">
+      <div className="paper-grain mx-auto max-w-5xl rounded-[0.25rem] border border-marfil/28 bg-marfil px-5 py-7 text-tinta shadow-[0_32px_100px_rgba(0,0,0,0.42)] sm:px-8">
+        <p className="hand-label text-lavanda">Ranking en directo</p>
+        <h1 className="mt-2 text-balance font-serif text-[clamp(4rem,9vw,7.5rem)] font-bold leading-[0.86]">
+          La liga del banquete
+        </h1>
+        <div className="mt-8">
           <RankingTable rows={ranking} highlightTop />
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/lavanda-divider.png" alt="" className="mx-auto mt-6 w-[170px] opacity-85" />
       </div>
     </main>
   );
