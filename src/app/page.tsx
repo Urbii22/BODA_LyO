@@ -16,12 +16,8 @@ export default function Home() {
           </Link>
         </nav>
 
-        <div className="grid flex-1 items-center gap-9 py-8 lg:grid-cols-[0.92fr_1.08fr] lg:py-10">
-          <div className="order-2 lg:order-1">
-            <InvitationArt />
-          </div>
-
-          <div className="order-1 lg:order-2">
+        <div className="grid flex-1 items-center gap-9 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-10">
+          <div className="order-1">
             <p className="hand-label text-lavanda">Mision de boda</p>
             <h1 className="mt-3 max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
               <span className="block">Luis</span>
@@ -36,6 +32,10 @@ export default function Home() {
               <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
               <Link href="/mesa/MESA-2"><Button type="button" variant="ghost">Ver mesa 2</Button></Link>
             </div>
+          </div>
+
+          <div className="order-2 mx-auto w-full max-w-md lg:mx-0">
+            <InvitationArt />
           </div>
         </div>
 
