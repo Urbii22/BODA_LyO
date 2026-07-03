@@ -8,8 +8,10 @@ import {
   setMissionActive,
   updateMission as updateMissionRecord,
 } from "../lib/repositories/missions.repository";
-import { setTableMission } from "../lib/repositories/tables.repository";
+import { getTableNotificationContext, setTableMission } from "../lib/repositories/tables.repository";
 import { getActiveWedding } from "../lib/repositories/weddings.repository";
+import { notifyTable } from "../lib/push/web-push";
+import { displayGroupCode, displayGroupName } from "../lib/utils/group-labels";
 import { missionFormSchema } from "../lib/validations/mission.schema";
 import type { MissionActionState } from "./mission-action-state";
 
@@ -89,5 +91,21 @@ export async function assignTableMission(formData: FormData) {
   const missionValue = String(formData.get("missionId") || "");
   if (!tableId) return;
   await setTableMission(tableId, missionValue || null);
+  if (missionValue) {
+    try {
+      const table = await getTableNotificationContext(tableId);
+      if (table?.mission) {
+        await notifyTable({
+          tableId,
+          title: "Nueva quest para vuestro grupo",
+          body: `${displayGroupName(table.name)}: ${table.mission.title}`,
+          url: `/grupo/${encodeURIComponent(displayGroupCode(table.code))}`,
+          tag: `mission-${tableId}-${table.mission.id}`,
+        });
+      }
+    } catch (error) {
+      console.error("No se pudo enviar la notificacion de nueva mision", error);
+    }
+  }
   revalidateMissionViews();
 }

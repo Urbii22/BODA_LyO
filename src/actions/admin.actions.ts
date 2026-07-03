@@ -13,6 +13,8 @@ import {
   deleteSubmission as deleteSubmissionRecord,
   reviewSubmission as reviewSubmissionRecord,
 } from "../lib/repositories/submissions.repository";
+import { notifyTable } from "../lib/push/web-push";
+import { displayGroupCode, displayGroupName } from "../lib/utils/group-labels";
 import { reviewSubmissionSchema } from "../lib/validations/submission.schema";
 
 export type AdminLoginState = {
@@ -55,12 +57,34 @@ export async function reviewSubmission(formData: FormData) {
     throw new Error(parsed.error.issues[0]?.message || "Revision no valida.");
   }
 
-  await reviewSubmissionRecord(
+  const reviewed = await reviewSubmissionRecord(
     parsed.data.submissionId,
     parsed.data.verdict,
     parsed.data.awardedPoints,
     parsed.data.adminNote,
   );
+
+  try {
+    if (reviewed.status === "approved") {
+      await notifyTable({
+        tableId: reviewed.tableId,
+        title: "Quest verificada",
+        body: `${displayGroupName(reviewed.tableName)} suma ${reviewed.awardedPoints} puntos por "${reviewed.missionTitle}".`,
+        url: `/grupo/${encodeURIComponent(displayGroupCode(reviewed.tableCode))}`,
+        tag: `submission-${reviewed.id}-approved`,
+      });
+    } else if (reviewed.status === "rejected") {
+      await notifyTable({
+        tableId: reviewed.tableId,
+        title: "Quest rechazada",
+        body: `${displayGroupName(reviewed.tableName)}: esta prueba no ha sido validada. Podeis intentar otra.`,
+        url: `/grupo/${encodeURIComponent(displayGroupCode(reviewed.tableCode))}`,
+        tag: `submission-${reviewed.id}-rejected`,
+      });
+    }
+  } catch (error) {
+    console.error("No se pudo enviar la notificacion de revision", error);
+  }
 
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");

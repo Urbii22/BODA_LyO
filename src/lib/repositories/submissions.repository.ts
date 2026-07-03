@@ -98,6 +98,16 @@ export type LatestSubmissionForAdmin = {
   missionTitle: string;
 };
 
+export type ReviewedSubmissionNotification = {
+  id: string;
+  tableId: string;
+  tableName: string;
+  tableCode: string;
+  missionTitle: string;
+  status: SubmissionStatus;
+  awardedPoints: number;
+};
+
 export async function getLatestSubmissionForAdmin(weddingId: string): Promise<LatestSubmissionForAdmin | null> {
   const { data, error } = await getSupabaseAdmin()
     .from("submissions")
@@ -130,12 +140,17 @@ export async function reviewSubmission(
   verdict: SubmissionStatus,
   awardedPoints?: number,
   adminNote?: string,
-): Promise<void> {
+): Promise<ReviewedSubmissionNotification> {
   const { data: current, error: currentError } = await getSupabaseAdmin()
     .from("submissions")
-    .select("id, missions(points)")
+    .select("id, table_id, missions(points, title), tables(name, code)")
     .eq("id", id)
-    .single<{ id: string; missions: { points: number } | null }>();
+    .single<{
+      id: string;
+      table_id: string;
+      missions: { points: number; title: string } | null;
+      tables: { name: string; code: string } | null;
+    }>();
 
   if (currentError) throw new Error(`No se pudo cargar el envio: ${currentError.message}`);
 
@@ -154,6 +169,16 @@ export async function reviewSubmission(
     .eq("id", id);
 
   if (error) throw new Error(`No se pudo revisar el envio: ${error.message}`);
+
+  return {
+    id,
+    tableId: current.table_id,
+    tableName: current.tables?.name ?? "Grupo",
+    tableCode: current.tables?.code ?? "",
+    missionTitle: current.missions?.title ?? "Mision",
+    status: verdict,
+    awardedPoints: points,
+  };
 }
 
 export async function deleteSubmission(id: string): Promise<void> {

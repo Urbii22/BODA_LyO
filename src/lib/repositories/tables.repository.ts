@@ -38,6 +38,22 @@ export async function setTableMission(tableId: string, missionId: string | null)
   if (error) throw new Error(`No se pudo asignar la mision: ${error.message}`);
 }
 
+export async function getTableNotificationContext(tableId: string): Promise<TableWithMission | null> {
+  const { data, error } = await getSupabaseAdmin()
+    .from("tables")
+    .select("*, missions(*)")
+    .eq("id", tableId)
+    .maybeSingle<TableWithMissionRow>();
+
+  if (error) throw new Error(`No se pudo cargar el grupo: ${error.message}`);
+  if (!data) return null;
+
+  return {
+    ...mapTable(data),
+    mission: data.missions ? mapMission(data.missions) : null,
+  };
+}
+
 export async function createTable(weddingId: string, input: TableFormInput): Promise<WeddingTable> {
   const { data, error } = await getSupabaseAdmin()
     .from("tables")
