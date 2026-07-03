@@ -23,9 +23,10 @@ export default function Home() {
 
           <div className="order-1 lg:order-2">
             <p className="hand-label text-lavanda">Mision de boda</p>
-            <h1 className="mt-3 max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.8rem)] font-bold leading-[0.82] text-vino">
-              Luis
-              <span className="block text-[0.58em] leading-none">& Oscar</span>
+            <h1 className="mt-3 max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
+              <span className="block">Luis</span>
+              <span className="block text-[0.52em] leading-[0.7] text-lavanda">&</span>
+              <span className="block">Oscar</span>
             </h1>
             <div className="mt-5 max-w-xl">
               <LavenderDivider label="Hotel Plati" />
