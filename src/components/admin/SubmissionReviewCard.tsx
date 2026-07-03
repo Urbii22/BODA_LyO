@@ -1,4 +1,4 @@
-import { reviewSubmission } from "../../actions/admin.actions";
+import { deleteSubmission, reviewSubmission } from "../../actions/admin.actions";
 import type { SubmissionWithRelations } from "../../lib/types/submission";
 import { formatDate } from "../../lib/utils/format-date";
 import { Badge } from "../ui/Badge";
@@ -64,6 +64,10 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
             <Button name="verdict" value="rejected" type="submit" variant="danger">Rechazar</Button>
             <Button name="verdict" value="pending" type="submit" variant="ghost">Volver a pendiente</Button>
           </div>
+        </form>
+        <form action={deleteSubmission} className="mt-3 border-t border-tinta/10 pt-3">
+          <input type="hidden" name="submissionId" value={submission.id} />
+          <Button type="submit" variant="danger">Borrar envio y foto</Button>
         </form>
       </div>
     </Card>

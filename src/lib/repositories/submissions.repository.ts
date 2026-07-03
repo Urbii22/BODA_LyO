@@ -90,6 +90,41 @@ export async function listSubmissionsForAdmin(
   );
 }
 
+export type LatestSubmissionForAdmin = {
+  id: string;
+  status: SubmissionStatus;
+  createdAt: string;
+  tableName: string;
+  missionTitle: string;
+};
+
+export async function getLatestSubmissionForAdmin(weddingId: string): Promise<LatestSubmissionForAdmin | null> {
+  const { data, error } = await getSupabaseAdmin()
+    .from("submissions")
+    .select("id, status, created_at, tables(name), missions(title)")
+    .eq("wedding_id", weddingId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle<{
+      id: string;
+      status: SubmissionStatus;
+      created_at: string;
+      tables: { name: string } | null;
+      missions: { title: string } | null;
+    }>();
+
+  if (error) throw new Error(`No se pudo cargar el ultimo envio: ${error.message}`);
+  if (!data) return null;
+
+  return {
+    id: data.id,
+    status: data.status,
+    createdAt: data.created_at,
+    tableName: data.tables?.name ?? "Mesa sin nombre",
+    missionTitle: data.missions?.title ?? "Mision sin titulo",
+  };
+}
+
 export async function reviewSubmission(
   id: string,
   verdict: SubmissionStatus,
@@ -119,6 +154,25 @@ export async function reviewSubmission(
     .eq("id", id);
 
   if (error) throw new Error(`No se pudo revisar el envio: ${error.message}`);
+}
+
+export async function deleteSubmission(id: string): Promise<void> {
+  const admin = getSupabaseAdmin();
+  const { data, error: readError } = await admin
+    .from("submissions")
+    .select("media_path")
+    .eq("id", id)
+    .single<{ media_path: string }>();
+
+  if (readError) throw new Error(`No se pudo cargar el envio: ${readError.message}`);
+
+  const { error: deleteError } = await admin.from("submissions").delete().eq("id", id);
+  if (deleteError) throw new Error(`No se pudo borrar el envio: ${deleteError.message}`);
+
+  if (data.media_path) {
+    const { error: storageError } = await admin.storage.from("submissions").remove([data.media_path]);
+    if (storageError) throw new Error(`El envio se borro, pero no la foto: ${storageError.message}`);
+  }
 }
 
 export async function getAdminStats(weddingId: string): Promise<{

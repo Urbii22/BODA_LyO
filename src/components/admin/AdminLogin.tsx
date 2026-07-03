@@ -18,8 +18,8 @@ export function AdminLogin() {
         <h1 className="mt-2 font-serif text-4xl font-bold leading-none">Acceso admin</h1>
         <form action={formAction} className="mt-5 space-y-4">
           <label className="block">
-            <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">PIN</span>
-            <Input name="pin" type="password" inputMode="numeric" minLength={6} required autoFocus />
+            <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">Contraseña</span>
+            <Input name="password" type="password" minLength={4} required autoFocus />
           </label>
           {state.message ? <p className="text-sm font-semibold text-vino">{state.message}</p> : null}
           <Button type="submit" disabled={isPending} className="w-full">

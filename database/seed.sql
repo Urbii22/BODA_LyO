@@ -21,7 +21,27 @@ with wedding as (
     ('Generaciones en pista', 'Juntad dos generaciones bailando en una misma prueba.', 75, 'hard', 'dance'),
     ('Anecdota secreta', 'Conseguid una anecdota tierna o divertida sobre los novios y documentad el momento.', 50, 'medium', 'social'),
     ('Foto real', 'Haced una foto espontanea que capture la boda tal como se recordara.', 25, 'easy', 'photo'),
-    ('Momento epico', 'Cread el momento mas inesperado, elegante y memorable de la noche.', 100, 'epic', 'funny')
+    ('Momento epico', 'Cread el momento mas inesperado, elegante y memorable de la noche.', 100, 'epic', 'funny'),
+    ('Intercambio de nombres', 'Conseguid el nombre de cinco personas de mesas distintas y una foto con cada nuevo fichaje.', 50, 'medium', 'social'),
+    ('Baile con desconocido', 'Sacad a bailar a alguien que no conociais de nada antes de hoy.', 50, 'medium', 'dance'),
+    ('Brindis entre mesas', 'Cruzad un brindis sincero con una mesa que no sea la vuestra.', 25, 'easy', 'social'),
+    ('Selfie en cadena', 'Una sola foto en la que salga gente de al menos tres mesas diferentes.', 50, 'medium', 'photo'),
+    ('El conector', 'Presentad a dos personas que no se conocian y lograd que acaben charlando solas.', 75, 'hard', 'social'),
+    ('Mas anos que vosotros', 'Encontrad a alguien que conozca a los novios desde hace mas anos que vosotros y que os cuente como fue.', 50, 'medium', 'emotional'),
+    ('Equipo mixto de baile', 'Montad un grupo de baile mitad de vuestra mesa, mitad de otra, y grabadlo.', 75, 'hard', 'dance'),
+    ('Piropo elegante', 'Regalad un piropo con clase a alguien que acabais de conocer y guardad su reaccion.', 25, 'easy', 'funny'),
+    ('El dato imposible', 'Averiguad un dato sorprendente de un desconocido de la boda y verificadlo con una foto juntos.', 50, 'medium', 'social'),
+    ('Familia de enfrente', 'Haced una foto de grupo con la mesa que teneis justo enfrente.', 25, 'easy', 'photo'),
+    ('Cadena de abrazos', 'Formad una cadena de abrazos que una a personas de tres mesas distintas.', 50, 'medium', 'emotional'),
+    ('Reto del idioma', 'Encontrad a alguien que hable otro idioma y aprended a decir felicidades en el.', 50, 'medium', 'social'),
+    ('Mesas hermanadas', 'Adoptad a otra mesa como aliada oficial e inventad un saludo secreto comun.', 50, 'medium', 'funny'),
+    ('Modo cupido', 'Conseguid que dos personas que no se conocian se hagan una foto juntas y felices.', 75, 'hard', 'funny'),
+    ('Busca tu gemelo', 'Encontrad a alguien de otra mesa vestido de un color parecido al vuestro y posad juntos.', 25, 'easy', 'photo'),
+    ('La ola', 'Organizad una ola humana que recorra al menos tres mesas del banquete.', 75, 'hard', 'funny'),
+    ('Consejo a duo', 'Un joven y una persona mayor que no se conocian graban juntos un consejo para los novios.', 50, 'medium', 'emotional'),
+    ('El corrillo', 'Formad un corro de ocho personas venidas de al menos cuatro mesas diferentes.', 50, 'medium', 'social'),
+    ('De la primera a la ultima', 'Reunid en una misma foto a alguien de la primera mesa y a alguien de la ultima.', 50, 'medium', 'photo'),
+    ('Historia de dos invitados', 'Encontrad a dos desconocidos que descubran que tienen algo en comun y contadlo.', 75, 'hard', 'social')
 )
 insert into missions (wedding_id, title, description, points, difficulty, category)
 select wedding.id, mission_seed.title, mission_seed.description, mission_seed.points, mission_seed.difficulty, mission_seed.category

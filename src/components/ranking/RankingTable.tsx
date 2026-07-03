@@ -25,7 +25,7 @@ export function RankingTable({ rows, highlightTop = false }: { rows: RankingRow[
           }`}
         >
           <div className="flex min-w-0 items-center gap-4">
-            <div className="grid size-12 shrink-0 place-items-center rounded-[0.3rem] border border-tinta/30 bg-tinta font-hand text-3xl font-bold text-marfil tabular-nums">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-[0.3rem] border border-tinta/30 bg-tinta font-sans text-xl font-bold leading-none text-marfil tabular-nums">
               {index + 1}
             </div>
             <div className="min-w-0">
