@@ -22,7 +22,7 @@ export async function createSubmission(
 ): Promise<SubmissionActionState> {
   const parsed = submissionSchema.safeParse({
     tableCode: formData.get("tableCode"),
-    participantName: formData.get("participantName"),
+    participantName: formData.get("participantName") || undefined,
     comment: formData.get("comment") || undefined,
   });
 
@@ -56,6 +56,7 @@ export async function createSubmission(
       return { ok: false, message: "La mision de esta mesa aun esta en preparacion." };
     }
 
+    const participantName = parsed.data.participantName || table.name;
     const submissionId = crypto.randomUUID();
     const mediaPath = `weddings/${wedding.slug}/tables/${table.code}/${submissionId}.jpg`;
     const bytes = await file.arrayBuffer();
@@ -77,7 +78,7 @@ export async function createSubmission(
         weddingId: wedding.id,
         tableId: table.id,
         missionId: table.mission.id,
-        participantName: parsed.data.participantName,
+        participantName,
         comment: parsed.data.comment,
         mediaPath,
       });
@@ -89,7 +90,7 @@ export async function createSubmission(
     revalidatePath(`/mesa/${table.code}`);
     return {
       ok: true,
-      message: "Prueba enviada. Pendiente de revision. Si se aprueba, vuestra mesa sumara puntos.",
+      message: "Foto enviada al jurado. Cuando la aprueben, vuestra mesa sumara puntos.",
     };
   } catch (error) {
     return {
