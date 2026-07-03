@@ -12,21 +12,21 @@ const statusCopy = {
 export function SubmissionStatusList({ submissions }: { submissions: SubmissionSummary[] }) {
   return (
     <Card>
-      <h2 className="font-serif text-2xl font-bold">Pruebas de vuestra mesa</h2>
+      <h2 className="font-serif text-4xl font-bold leading-none">Pruebas de vuestra mesa</h2>
       {submissions.length === 0 ? (
-        <p className="mt-3 text-sm text-tinta/65">Aun no hay pruebas. La primera vale doble en gloria.</p>
+        <p className="mt-3 text-base text-graphite">Aun no hay pruebas. La primera vale doble en gloria.</p>
       ) : (
         <ul className="mt-4 space-y-3">
           {submissions.map((submission) => (
-            <li key={submission.id} className="rounded-md border border-tinta/10 bg-marfil/70 p-3">
+            <li key={submission.id} className="rounded-[0.3rem] border border-tinta/15 bg-marfil/74 p-3">
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <p className="font-semibold">Prueba enviada</p>
-                  <p className="text-xs text-tinta/55">{formatDate(submission.createdAt)}</p>
+                  <p className="text-xs font-semibold text-graphite">{formatDate(submission.createdAt)}</p>
                 </div>
                 <Badge tone={statusCopy[submission.status].tone}>{statusCopy[submission.status].label}</Badge>
               </div>
-              {submission.comment ? <p className="mt-2 text-sm text-tinta/70">{submission.comment}</p> : null}
+              {submission.comment ? <p className="mt-2 text-sm text-graphite">{submission.comment}</p> : null}
             </li>
           ))}
         </ul>

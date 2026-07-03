@@ -1,49 +1,58 @@
 import Link from "next/link";
 import { appConfig } from "../lib/config";
 import { Button } from "../components/ui/Button";
+import { InvitationArt, LavenderDivider } from "../components/wedding/InvitationArt";
 
 export const revalidate = 10;
 
 export default function Home() {
   return (
-    <main className="paper-grain flex min-h-screen flex-col justify-between gap-8 px-4 py-6">
-      <section className="mx-auto w-[calc(100vw-32px)] max-w-[420px]">
+    <main className="page-shell paper-grain min-h-screen px-4 py-5 sm:px-6">
+      <section className="mx-auto flex min-h-[calc(100dvh-2.5rem)] max-w-6xl flex-col">
         <nav className="flex items-center justify-between gap-4">
-          <p className="font-serif text-2xl font-bold text-vino">{appConfig.appName}</p>
-          <Link href="/ranking" className="rounded-md px-3 py-2 text-sm font-semibold hover:bg-white/70">
+          <p className="font-hand text-3xl font-bold text-vino">{appConfig.appName}</p>
+          <Link href="/ranking" className="rounded-[0.3rem] border border-tinta/20 bg-white/42 px-3 py-2 text-sm font-bold hover:bg-white/70">
             Ranking
           </Link>
         </nav>
-        <p className="mt-6 text-sm font-bold uppercase tracking-[0.24em] text-oro-viejo">Misión de boda</p>
-        <h1 className="mt-4 font-serif text-[56px] font-extrabold leading-[0.95] text-tinta">{appConfig.coupleName}</h1>
-        <p className="mt-6 text-lg leading-[1.7] text-tinta/72">{appConfig.copy.intro}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
-          <Link href="/mesa/MESA-1"><Button type="button" variant="ghost">Probar mesa 1</Button></Link>
-        </div>
-        <div className="mt-10 rounded-lg border border-tinta/10 bg-white/70 p-4 shadow-[0_24px_60px_rgba(38,33,29,0.1)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/ilustracion-novios.png" alt="Luis y Óscar con su perro" className="mx-auto mb-3 h-[150px] rounded-md" />
-          <div className="grid gap-3">
-            {["Escanea el QR de tu mesa", "Cumple la misión secreta", "Sube foto y suma gloria"].map((step, index) => (
-              <div key={step} className="flex items-center gap-4 rounded-md bg-marfil p-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-md bg-vino font-serif text-xl font-bold text-white">
-                  {index + 1}
-                </span>
-                <p className="font-semibold">{step}</p>
-              </div>
-            ))}
+
+        <div className="grid flex-1 items-center gap-9 py-8 lg:grid-cols-[0.92fr_1.08fr] lg:py-10">
+          <div className="order-2 lg:order-1">
+            <InvitationArt />
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <p className="hand-label text-lavanda">Mision de boda</p>
+            <h1 className="mt-3 max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
+              <span className="block">Luis</span>
+              <span className="block text-[0.52em] leading-[0.7] text-lavanda">&</span>
+              <span className="block">Oscar</span>
+            </h1>
+            <div className="mt-5 max-w-xl">
+              <LavenderDivider label="Hotel Plati" />
+            </div>
+            <p className="mt-6 max-w-[58ch] text-xl leading-8 text-graphite">{appConfig.copy.intro}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
+              <Link href="/mesa/MESA-2"><Button type="button" variant="ghost">Ver mesa 2</Button></Link>
+            </div>
           </div>
         </div>
-      </section>
-      <div className="mx-auto w-[calc(100vw-32px)] max-w-[420px]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/lavanda-divider.png" alt="" className="mx-auto w-[170px] opacity-85" />
-        <footer className="mt-2 flex items-center justify-between gap-4 border-t border-tinta/10 pt-4 text-[13px] text-tinta/55">
+
+        <div className="grid gap-3 pb-6 md:grid-cols-3">
+          {["Escanead el QR de vuestra mesa", "Completad la mision secreta", "Subid una foto y sumad gloria"].map((step, index) => (
+            <article key={step} className="sketch-card rounded-[0.35rem] p-4">
+              <span className="font-hand text-3xl font-bold text-vino">0{index + 1}</span>
+              <p className="mt-2 text-lg font-semibold leading-6">{step}</p>
+            </article>
+          ))}
+        </div>
+
+        <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-tinta/20 py-4 text-sm text-graphite">
           <span>{appConfig.copy.tagline}</span>
-          <Link href="/admin" className="hover:text-vino">Admin</Link>
+          <Link href="/admin" className="font-bold hover:text-vino">Jurado</Link>
         </footer>
-      </div>
+      </section>
     </main>
   );
 }

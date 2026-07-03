@@ -1,23 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --color-marfil: #faf7f2;
-  --color-ivory-deep: #efe6d8;
-  --color-tinta: #26211d;
-  --color-champagne: #d9b56d;
-  --color-oro-viejo: #a67c36;
-  --color-vino: #7a2743;
-  --color-oliva: #6f7a48;
-  --color-lavanda: #775d87;
-  --color-lavanda-deep: #664c79;
-  --color-noche: #171412;
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --color-marfil: #fbf3df;
+  --color-ivory-deep: #eadfc7;
+  --color-tinta: #2d2a28;
+  --color-graphite: #55514c;
+  --color-champagne: #d5b46d;
+  --color-oro-viejo: #9c7a3c;
+  --color-vino: #7d2f44;
+  --color-oliva: #748260;
+  --color-lavanda: #7d6098;
+  --color-lavanda-suave: #d8c7dc;
+  --color-noche: #181715;
+  --font-sans: var(--font-sans-brand);
+  --font-serif: var(--font-serif-brand);
+  --font-hand: var(--font-hand);
 }
 
 :root {
-  --background: #faf7f2;
-  --foreground: #26211d;
+  --background: #fbf3df;
+  --foreground: #2d2a28;
+  --line: rgba(45, 42, 40, 0.24);
+  --line-strong: rgba(45, 42, 40, 0.58);
+  --paper-shadow: 0 28px 80px rgba(45, 42, 40, 0.14);
 }
 
 * {
@@ -25,23 +30,22 @@
 }
 
 html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
-  overflow-x: hidden;
   background:
-    radial-gradient(circle at 20% 0%, rgba(217, 181, 109, 0.16), transparent 30rem),
-    linear-gradient(180deg, #fffaf0 0%, #faf7f2 44%, #efe6d8 100%);
+    radial-gradient(circle at 16% 8%, rgba(216, 199, 220, 0.46), transparent 18rem),
+    radial-gradient(circle at 86% 16%, rgba(116, 130, 96, 0.18), transparent 20rem),
+    linear-gradient(180deg, #fff8e8 0%, #fbf3df 48%, #eadfc7 100%);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-sans-brand), "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
+  font-kerning: normal;
 }
 
 button,
@@ -59,11 +63,115 @@ img {
   max-width: 100%;
 }
 
+.font-hand {
+  font-family: var(--font-hand), cursive;
+}
+
 .paper-grain {
   background-image:
-    linear-gradient(rgba(38, 33, 29, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(38, 33, 29, 0.035) 1px, transparent 1px);
-  background-size: 26px 26px;
+    radial-gradient(circle at 12% 20%, rgba(45, 42, 40, 0.055) 0 1px, transparent 1.3px),
+    radial-gradient(circle at 74% 66%, rgba(116, 130, 96, 0.08) 0 1px, transparent 1.4px),
+    linear-gradient(rgba(45, 42, 40, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(45, 42, 40, 0.022) 1px, transparent 1px);
+  background-position: 0 0, 11px 7px, 0 0, 0 0;
+  background-size: 31px 31px, 37px 37px, 28px 28px, 28px 28px;
+}
+
+.page-shell {
+  min-height: 100dvh;
+  background:
+    linear-gradient(90deg, rgba(45, 42, 40, 0.06) 1px, transparent 1px) 50% 0 / min(92vw, 72rem) 100% no-repeat,
+    transparent;
+}
+
+.invitation-frame {
+  position: relative;
+  border: 1.5px solid var(--line-strong);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 239, 0.88), rgba(251, 243, 223, 0.9)),
+    var(--background);
+  box-shadow: var(--paper-shadow);
+}
+
+.invitation-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  pointer-events: none;
+  border: 1px solid rgba(45, 42, 40, 0.18);
+}
+
+.sketch-card {
+  position: relative;
+  border: 1.5px solid rgba(45, 42, 40, 0.22);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255, 255, 255, 0.52), transparent 17rem),
+    rgba(255, 250, 238, 0.72);
+  box-shadow: 0 14px 34px rgba(45, 42, 40, 0.08);
+}
+
+.sketch-card::after {
+  content: "";
+  position: absolute;
+  inset: 0.35rem;
+  pointer-events: none;
+  border: 1px solid rgba(45, 42, 40, 0.08);
+}
+
+.sketch-rule {
+  height: 1px;
+  background:
+    linear-gradient(90deg, transparent, rgba(45, 42, 40, 0.36), transparent);
+}
+
+.lavender-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  color: var(--color-lavanda);
+}
+
+.lavender-divider::before,
+.lavender-divider::after {
+  content: "";
+  width: 3.8rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.65;
+}
+
+.hand-label {
+  font-family: var(--font-hand), cursive;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(125, 96, 152, 0.22);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw-in {
+    animation: draw-in 640ms ease-out both;
+  }
+
+  @keyframes draw-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) rotate(-0.4deg);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0);
+    }
+  }
 }
 
 @media print {

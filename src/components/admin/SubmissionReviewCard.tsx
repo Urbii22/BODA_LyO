@@ -26,32 +26,36 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
         <img
           src={submission.signedMediaUrl}
           alt={`Prueba enviada por ${submission.table.name}`}
-          className="h-72 w-full rounded-md object-cover lg:h-full"
+          className="h-72 w-full rounded-[0.3rem] border border-tinta/15 object-cover lg:h-full"
         />
       ) : (
-        <div className="grid h-72 place-items-center rounded-md bg-marfil text-sm text-tinta/55">Sin imagen</div>
+        <div className="grid h-72 place-items-center rounded-[0.3rem] bg-marfil text-sm text-graphite">Sin imagen</div>
       )}
       <div>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.12em] text-vino">{submission.table.name}</p>
-            <h2 className="font-serif text-3xl font-bold">{submission.mission.title}</h2>
-            <p className="mt-1 text-sm text-tinta/60">
+            <p className="hand-label text-lavanda">{submission.table.name}</p>
+            <h2 className="mt-1 font-serif text-4xl font-bold leading-none">{submission.mission.title}</h2>
+            <p className="mt-2 text-sm font-semibold text-graphite">
               Enviada por {submission.table.name} · {formatDate(submission.createdAt)}
             </p>
           </div>
           <Badge tone={statusTone[submission.status]}>{statusCopy[submission.status]}</Badge>
         </div>
-        {submission.comment ? <p className="mt-4 rounded-md bg-marfil p-3 text-sm text-tinta/75">{submission.comment}</p> : null}
+        {submission.comment ? (
+          <p className="mt-4 rounded-[0.3rem] border border-tinta/10 bg-marfil p-3 text-sm text-graphite">
+            {submission.comment}
+          </p>
+        ) : null}
         <form action={reviewSubmission} className="mt-5 grid gap-3">
           <input type="hidden" name="submissionId" value={submission.id} />
           <div className="grid gap-3 sm:grid-cols-2">
             <label>
-              <span className="text-sm font-semibold">Puntos</span>
+              <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">Puntos</span>
               <Input name="awardedPoints" type="number" min={0} placeholder={String(submission.mission.points)} />
             </label>
             <label>
-              <span className="text-sm font-semibold">Nota admin</span>
+              <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">Nota admin</span>
               <Input name="adminNote" placeholder="Opcional" />
             </label>
           </div>

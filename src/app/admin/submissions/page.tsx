@@ -28,15 +28,16 @@ export default async function AdminSubmissionsPage({
   const submissions = await listSubmissionsForAdmin(wedding.id, activeStatus);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
-      <h1 className="font-serif text-5xl font-bold">Cola de pruebas</h1>
+    <main className="page-shell paper-grain mx-auto max-w-6xl px-4 py-8">
+      <p className="hand-label text-lavanda">Fotos por revisar</p>
+      <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Cola de pruebas</h1>
       <div className="mt-5 flex flex-wrap gap-2">
         {statuses.map((item) => (
           <Link
             key={item.label}
             href={item.value ? `/admin/submissions?status=${item.value}` : "/admin/submissions?status=all"}
-            className={`rounded-md border px-3 py-2 text-sm font-semibold ${
-              (item.value ?? "all") === (status ?? "pending") ? "border-vino bg-vino text-white" : "border-tinta/10 bg-white/60"
+            className={`rounded-[0.3rem] border px-3 py-2 text-sm font-bold ${
+              (item.value ?? "all") === (status ?? "pending") ? "border-tinta bg-tinta text-marfil" : "border-tinta/20 bg-white/60"
             }`}
           >
             {item.label}
@@ -45,7 +46,7 @@ export default async function AdminSubmissionsPage({
       </div>
       <div className="mt-6 space-y-4">
         {submissions.length === 0 ? (
-          <p className="rounded-md bg-white/70 p-4 text-tinta/65">No hay pruebas en esta vista.</p>
+          <p className="sketch-card rounded-[0.35rem] p-4 text-graphite">No hay pruebas en esta vista.</p>
         ) : (
           submissions.map((submission) => (
             <SubmissionReviewCard key={submission.id} submission={submission} />

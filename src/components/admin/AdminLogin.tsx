@@ -12,13 +12,13 @@ export function AdminLogin() {
   const [state, formAction, isPending] = useActionState(adminLogin, initialState);
 
   return (
-    <main className="grid min-h-screen place-items-center px-4 py-10">
+    <main className="page-shell paper-grain grid min-h-screen place-items-center px-4 py-10">
       <Card className="w-full max-w-sm">
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-vino">Jurado</p>
-        <h1 className="mt-3 font-serif text-3xl font-bold">Acceso admin</h1>
+        <p className="hand-label text-lavanda">Jurado</p>
+        <h1 className="mt-2 font-serif text-4xl font-bold leading-none">Acceso admin</h1>
         <form action={formAction} className="mt-5 space-y-4">
           <label className="block">
-            <span className="text-sm font-semibold">PIN</span>
+            <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">PIN</span>
             <Input name="pin" type="password" inputMode="numeric" minLength={6} required autoFocus />
           </label>
           {state.message ? <p className="text-sm font-semibold text-vino">{state.message}</p> : null}
