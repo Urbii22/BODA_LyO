@@ -4,6 +4,7 @@ import { useState } from "react";
 import { deleteTable, updateTable } from "../../actions/tables.actions";
 import type { Mission } from "../../lib/types/mission";
 import type { WeddingTable } from "../../lib/types/table";
+import { displayGroupCode, displayGroupName } from "../../lib/utils/group-labels";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -25,8 +26,8 @@ export function TableEditRow({ table, mission, missions, usage }: Props) {
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-serif text-3xl font-bold leading-none">{table.name}</h3>
-            <Badge tone="ink">{table.code}</Badge>
+            <h3 className="font-serif text-3xl font-bold leading-none">{displayGroupName(table.name)}</h3>
+            <Badge tone="ink">{displayGroupCode(table.code)}</Badge>
           </div>
           <p className="mt-2 text-sm text-graphite">
             Orden {table.displayOrder}
@@ -43,7 +44,7 @@ export function TableEditRow({ table, mission, missions, usage }: Props) {
             {editing ? "Cerrar" : "Editar"}
           </Button>
           {hasSubmissions ? (
-            <span className="self-center text-xs text-graphite" title="Tiene pruebas enviadas. Borrarla perderia historial.">
+            <span className="self-center text-xs text-graphite" title="Tiene pruebas enviadas. Borrarlo perderia historial.">
               protegida
             </span>
           ) : (
@@ -57,13 +58,13 @@ export function TableEditRow({ table, mission, missions, usage }: Props) {
       {editing ? (
         <div className="mt-4 border-t border-tinta/10 pt-4">
           <p className="mb-3 text-xs font-semibold text-vino">
-            Si cambias el codigo, los QR ya impresos de esta mesa dejaran de apuntar al enlace antiguo.
+            Si cambias el codigo, los QR ya impresos de este grupo dejaran de apuntar al enlace antiguo.
           </p>
           <TableForm
             action={updateTable}
             table={table}
             missions={missions}
-            submitLabel="Guardar mesa"
+            submitLabel="Guardar grupo"
             onSuccess={() => setEditing(false)}
           />
         </div>

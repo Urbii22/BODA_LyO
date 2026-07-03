@@ -9,13 +9,13 @@ export function NewTableCard({ missions, nextOrder }: { missions: Mission[]; nex
   return (
     <Card>
       <div className="mb-4">
-        <p className="hand-label text-lavanda">Nueva mesa</p>
-        <h2 className="font-serif text-4xl font-bold leading-none">Anadir mesa</h2>
+        <p className="hand-label text-lavanda">Nuevo grupo</p>
+        <h2 className="font-serif text-4xl font-bold leading-none">Anadir grupo</h2>
       </div>
       <TableForm
         action={createTable}
         missions={missions}
-        submitLabel="Crear mesa"
+        submitLabel="Crear grupo"
         defaultDisplayOrder={nextOrder}
         resetOnSuccess
       />

@@ -51,7 +51,7 @@ export function SubmissionForm({ tableCode }: { tableCode: string }) {
         <input type="hidden" name="tableCode" value={tableCode} />
         <label className="block">
           <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">Comentario</span>
-          <Textarea name="comment" maxLength={500} placeholder="Opcional: explicad la jugada maestra de vuestra mesa." />
+          <Textarea name="comment" maxLength={500} placeholder="Opcional: explicad la jugada maestra de vuestro grupo." />
         </label>
         <div className="block">
           <span className="text-sm font-bold uppercase tracking-[0.08em] text-graphite">Foto de la prueba</span>

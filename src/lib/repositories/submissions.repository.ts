@@ -77,7 +77,7 @@ export async function listSubmissionsForAdmin(
   return Promise.all(
     data.map(async (row) => {
       if (!row.tables || !row.missions) {
-        throw new Error("Hay un envio sin mesa o mision asociada.");
+        throw new Error("Hay un envio sin grupo o mision asociada.");
       }
 
       return {
@@ -120,7 +120,7 @@ export async function getLatestSubmissionForAdmin(weddingId: string): Promise<La
     id: data.id,
     status: data.status,
     createdAt: data.created_at,
-    tableName: data.tables?.name ?? "Mesa sin nombre",
+    tableName: data.tables?.name ?? "Grupo sin nombre",
     missionTitle: data.missions?.title ?? "Mision sin titulo",
   };
 }
@@ -193,7 +193,7 @@ export async function getAdminStats(weddingId: string): Promise<{
       .returns<{ table_id: string }[]>(),
   ]);
 
-  if (tables.error) throw new Error(`No se pudieron calcular las mesas con puntos: ${tables.error.message}`);
+  if (tables.error) throw new Error(`No se pudieron calcular los grupos con puntos: ${tables.error.message}`);
 
   return {
     pending,

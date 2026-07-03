@@ -1,4 +1,5 @@
 import type { RankingRow } from "../../lib/types/ranking";
+import { displayGroupCode, displayGroupName } from "../../lib/utils/group-labels";
 import { Badge } from "../ui/Badge";
 import { Card } from "../ui/Card";
 
@@ -29,9 +30,9 @@ export function RankingTable({ rows, highlightTop = false }: { rows: RankingRow[
               {index + 1}
             </div>
             <div className="min-w-0">
-              <p className="truncate font-serif text-3xl font-bold leading-none">{row.tableName}</p>
+              <p className="truncate font-serif text-3xl font-bold leading-none">{displayGroupName(row.tableName)}</p>
               <p className="mt-1 text-sm font-semibold text-graphite">
-                {row.tableCode} · {row.approvedCount} aprobadas
+                {displayGroupCode(row.tableCode)} · {row.approvedCount} aprobadas
               </p>
             </div>
           </div>

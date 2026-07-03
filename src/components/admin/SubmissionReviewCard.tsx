@@ -1,6 +1,7 @@
 import { deleteSubmission, reviewSubmission } from "../../actions/admin.actions";
 import type { SubmissionWithRelations } from "../../lib/types/submission";
 import { formatDate } from "../../lib/utils/format-date";
+import { displayGroupName } from "../../lib/utils/group-labels";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -19,13 +20,15 @@ const statusCopy = {
 };
 
 export function SubmissionReviewCard({ submission }: { submission: SubmissionWithRelations }) {
+  const groupName = displayGroupName(submission.table.name);
+
   return (
     <Card className="grid gap-4 lg:grid-cols-[280px_1fr]">
       {submission.signedMediaUrl ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={submission.signedMediaUrl}
-          alt={`Prueba enviada por ${submission.table.name}`}
+          alt={`Prueba enviada por ${groupName}`}
           className="h-72 w-full rounded-[0.3rem] border border-tinta/15 object-cover lg:h-full"
         />
       ) : (
@@ -34,10 +37,10 @@ export function SubmissionReviewCard({ submission }: { submission: SubmissionWit
       <div>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="hand-label text-lavanda">{submission.table.name}</p>
+            <p className="hand-label text-lavanda">{groupName}</p>
             <h2 className="mt-1 font-serif text-4xl font-bold leading-none">{submission.mission.title}</h2>
             <p className="mt-2 text-sm font-semibold text-graphite">
-              Enviada por {submission.table.name} · {formatDate(submission.createdAt)}
+              Enviada por {groupName} · {formatDate(submission.createdAt)}
             </p>
           </div>
           <Badge tone={statusTone[submission.status]}>{statusCopy[submission.status]}</Badge>

@@ -7,6 +7,7 @@ import { hasSupabaseConfig } from "../../../lib/config";
 import { getMissionUsage, listMissions } from "../../../lib/repositories/missions.repository";
 import { listTables } from "../../../lib/repositories/tables.repository";
 import { getActiveWedding } from "../../../lib/repositories/weddings.repository";
+import { displayGroupCode, displayGroupName } from "../../../lib/utils/group-labels";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,7 @@ export default async function AdminMissionsPage() {
       <p className="hand-label text-lavanda">Control de retos</p>
       <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Misiones</h1>
       <p className="mt-3 max-w-[60ch] text-graphite">
-        Crea, edita, oculta o borra retos sin tocar codigo. Abajo eliges que mision ve cada mesa; el cambio se guarda al instante.
+        Crea, edita, oculta o borra retos sin tocar codigo. Abajo eliges que mision ve cada grupo; el cambio se guarda al instante.
       </p>
 
       <div className="mt-6">
@@ -35,15 +36,15 @@ export default async function AdminMissionsPage() {
       </div>
 
       <section className="mt-8">
-        <h2 className="font-serif text-4xl font-bold leading-none">Mision por mesa</h2>
-        <p className="mt-1 text-sm text-graphite">Cambia el reto de una mesa en directo. Se aplica en su QR en segundos.</p>
+        <h2 className="font-serif text-4xl font-bold leading-none">Mision por grupo</h2>
+        <p className="mt-1 text-sm text-graphite">Cambia el reto de un grupo en directo. Se aplica en su QR en segundos.</p>
         <Card className="mt-4">
           <ul className="grid gap-3 sm:grid-cols-2">
             {tables.map((table) => (
               <li key={table.id} className="grid gap-1">
                 <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-bold">{table.name}</span>
-                  <span className="text-xs font-semibold text-vino">{table.code}</span>
+                  <span className="text-sm font-bold">{displayGroupName(table.name)}</span>
+                  <span className="text-xs font-semibold text-vino">{displayGroupCode(table.code)}</span>
                 </div>
                 <TableMissionSelect tableId={table.id} currentMissionId={table.missionId} missions={missions} />
                 {table.missionId && !missionById.has(table.missionId) ? (

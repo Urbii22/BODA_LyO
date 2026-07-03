@@ -19,7 +19,7 @@ export default async function RankingPage() {
       <div className="mx-auto max-w-4xl">
         <Link href="/" className="text-sm font-bold text-vino">Volver a la invitacion</Link>
         <div className="invitation-frame paper-grain mt-5 rounded-[0.2rem] px-5 py-7 text-center">
-          <p className="hand-label text-lavanda">Ranking de mesas</p>
+          <p className="hand-label text-lavanda">Ranking de grupos</p>
           <h1 className="mt-2 text-balance font-serif text-[clamp(3.3rem,8vw,6.4rem)] font-bold leading-[0.86]">
             La liga del banquete
           </h1>

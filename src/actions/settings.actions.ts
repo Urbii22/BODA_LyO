@@ -32,5 +32,6 @@ export async function updateWedding(
   revalidatePath("/ranking");
   revalidatePath("/ranking/live");
   revalidatePath("/mesa/[code]", "page");
+  revalidatePath("/grupo/[code]", "page");
   return { ok: true, message: "Datos de la boda actualizados." };
 }

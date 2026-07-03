@@ -24,16 +24,16 @@ export default async function AdminTablesPage() {
   return (
     <main className="page-shell paper-grain mx-auto max-w-6xl px-4 py-8">
       <p className="hand-label text-lavanda">Mapa de invitados</p>
-      <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Mesas</h1>
+      <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Grupos</h1>
       <p className="mt-3 max-w-[64ch] text-graphite">
-        Anade, reordena o edita mesas desde aqui. El codigo es el enlace del QR, asi que conviene cambiarlo solo antes de imprimir o compartir.
+        Anade, reordena o edita grupos desde aqui. El codigo es el enlace del QR, asi que conviene cambiarlo solo antes de imprimir o compartir.
       </p>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
         <NewTableCard missions={missions} nextOrder={nextOrder} />
         <Card>
           <p className="hand-label text-lavanda">Resumen</p>
-          <h2 className="font-serif text-4xl font-bold leading-none">{tables.length} mesas activas</h2>
+          <h2 className="font-serif text-4xl font-bold leading-none">{tables.length} grupos activos</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Envios</p>
@@ -59,7 +59,7 @@ export default async function AdminTablesPage() {
 
       <section className="mt-8">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="font-serif text-4xl font-bold leading-none">Todas las mesas</h2>
+          <h2 className="font-serif text-4xl font-bold leading-none">Todos los grupos</h2>
           <span className="text-sm font-semibold text-graphite">Orden del ranking y QR</span>
         </div>
         <div className="mt-4 space-y-3">
