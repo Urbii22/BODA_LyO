@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { SetupNotice } from "../../../components/SetupNotice";
 import { MissionCard } from "../../../components/mesa/MissionCard";
 import { PushNotificationCard } from "../../../components/mesa/PushNotificationCard";
@@ -36,9 +37,14 @@ export default async function MesaPage({ params }: { params: Promise<{ code: str
               <p className="hand-label text-lavanda-suave">{groupCode}</p>
               <h1 className="mt-1 font-serif text-5xl font-bold leading-none">{groupName}</h1>
             </div>
-            <span className="rounded-[0.25rem] border border-marfil/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-champagne">
-              Sobre abierto
-            </span>
+            <div className="flex shrink-0 flex-col items-end gap-2">
+              <span className="rounded-[0.25rem] border border-marfil/30 px-3 py-1 text-xs font-bold uppercase tracking-[0.16em] text-champagne">
+                Sobre abierto
+              </span>
+              <Link href="/grupo?cambiar=1" className="text-xs font-bold uppercase tracking-[0.12em] text-marfil/72 hover:text-champagne">
+                Cambiar grupo
+              </Link>
+            </div>
           </div>
           <div className="mt-5 text-marfil/82">
             <LavenderDivider label="misión secreta" />

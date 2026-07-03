@@ -6,6 +6,7 @@ export type WeddingTable = {
   code: string;
   name: string;
   displayOrder: number;
+  manualPoints: number;
   missionId: string | null;
   createdAt: string;
   updatedAt: string;

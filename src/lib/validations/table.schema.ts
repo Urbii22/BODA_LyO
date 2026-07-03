@@ -9,6 +9,7 @@ export const tableFormSchema = z.object({
     .max(40, "El codigo del grupo es muy largo.")
     .transform(normalizeTableCode),
   displayOrder: z.coerce.number().int("El orden debe ser un numero entero.").min(0, "El orden no puede ser negativo.").max(999, "Orden demasiado alto."),
+  manualPoints: z.coerce.number().int("Los puntos deben ser un numero entero.").min(-9999, "Ajuste demasiado bajo.").max(9999, "Ajuste demasiado alto."),
   missionId: z.string().uuid("Mision no valida.").optional().or(z.literal("")).transform((value) => value || null),
 });
 

@@ -28,6 +28,7 @@ create table tables (
   code          text not null,
   name          text not null,
   display_order integer not null default 0,
+  manual_points integer not null default 0,
   mission_id    uuid references missions(id),
   created_at    timestamptz not null default now(),
   updated_at    timestamptz not null default now(),
@@ -74,7 +75,8 @@ select
   t.name as table_name,
   t.code as table_code,
   t.display_order,
-  coalesce(sum(s.awarded_points) filter (where s.status = 'approved'), 0) as total_points,
+  t.manual_points,
+  coalesce(sum(s.awarded_points) filter (where s.status = 'approved'), 0) + t.manual_points as total_points,
   count(s.id) filter (where s.status = 'approved') as approved_count,
   min(s.reviewed_at) filter (where s.status = 'approved') as first_approved_at
 from tables t
