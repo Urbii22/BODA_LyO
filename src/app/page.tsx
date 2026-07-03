@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { appConfig } from "../lib/config";
 import { Button } from "../components/ui/Button";
-import { InvitationArt, LavenderDivider } from "../components/wedding/InvitationArt";
+import { LavenderDivider } from "../components/wedding/InvitationArt";
 
 export const revalidate = 10;
 
@@ -17,36 +17,30 @@ export default function Home() {
           </Link>
         </nav>
 
-        <div className="grid flex-1 items-center gap-9 py-8 lg:grid-cols-[1.02fr_0.98fr] lg:py-10">
-          <div className="order-1">
-            <p className="hand-label text-lavanda">Mision de boda</p>
-            <div className="mt-3 flex items-center gap-6 sm:gap-8">
-              <h1 className="max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
-                <span className="block">Luis</span>
-                <span className="block text-[0.52em] leading-[0.7] text-lavanda">&</span>
-                <span className="block">Oscar</span>
-              </h1>
-              <Image
-                src="/brand/ilustracion-novios.png"
-                alt="Luis y Oscar con su perro"
-                width={245}
-                height={320}
-                priority
-                className="h-auto w-24 shrink-0 sm:w-28 lg:hidden"
-              />
-            </div>
-            <div className="mt-5 max-w-xl">
-              <LavenderDivider label="Hotel Plati" />
-            </div>
-            <p className="mt-6 max-w-[58ch] text-xl leading-8 text-graphite">{appConfig.copy.intro}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
-              <Link href="/mesa/MESA-2"><Button type="button" variant="ghost">Ver mesa 2</Button></Link>
-            </div>
+        <div className="flex flex-1 flex-col justify-center py-8 lg:py-10">
+          <p className="hand-label text-lavanda">Mision de boda</p>
+          <div className="mt-3 flex items-center gap-6 sm:gap-8">
+            <h1 className="max-w-3xl text-balance font-hand text-[clamp(4.2rem,10vw,8.2rem)] font-bold leading-[0.82] text-vino">
+              <span className="block">Luis</span>
+              <span className="block text-[0.52em] leading-[0.7] text-lavanda">&</span>
+              <span className="block">Oscar</span>
+            </h1>
+            <Image
+              src="/brand/ilustracion-novios.png"
+              alt="Luis y Oscar con su perro"
+              width={245}
+              height={320}
+              priority
+              className="h-auto w-28 shrink-0 sm:w-36 lg:w-44"
+            />
           </div>
-
-          <div className="order-2 mx-auto w-full max-w-md lg:mx-0">
-            <InvitationArt />
+          <div className="mt-5 max-w-xl">
+            <LavenderDivider label="Hotel Plati" />
+          </div>
+          <p className="mt-6 max-w-[58ch] text-xl leading-8 text-graphite">{appConfig.copy.intro}</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
+            <Link href="/mesa/MESA-2"><Button type="button" variant="ghost">Ver mesa 2</Button></Link>
           </div>
         </div>
 
