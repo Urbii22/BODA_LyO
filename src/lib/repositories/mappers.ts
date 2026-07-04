@@ -34,7 +34,6 @@ type TableRow = {
   code: string;
   name: string;
   display_order: number;
-  manual_points: number;
   mission_id: string | null;
   created_at: string;
   updated_at: string;
@@ -62,7 +61,6 @@ type RankingRowDb = {
   table_name: string;
   table_code: string;
   display_order: number;
-  manual_points: number;
   total_points: number;
   approved_count: number;
   first_approved_at: string | null;
@@ -105,7 +103,6 @@ export function mapTable(row: TableRow): WeddingTable {
     code: row.code,
     name: row.name,
     displayOrder: row.display_order,
-    manualPoints: row.manual_points,
     missionId: row.mission_id,
     createdAt: row.created_at,
     updatedAt: row.updated_at,
@@ -137,7 +134,6 @@ export function mapRankingRow(row: RankingRowDb): RankingRow {
     tableName: row.table_name,
     tableCode: row.table_code,
     displayOrder: row.display_order,
-    manualPoints: Number(row.manual_points),
     totalPoints: Number(row.total_points),
     approvedCount: Number(row.approved_count),
     firstApprovedAt: row.first_approved_at,

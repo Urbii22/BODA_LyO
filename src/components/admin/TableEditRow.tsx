@@ -14,7 +14,7 @@ type Props = {
   table: WeddingTable;
   mission: Mission | null;
   missions: Mission[];
-  usage: { submissions: number; approved: number; approvedPoints: number; manualPoints: number; points: number };
+  usage: { submissions: number; approved: number; points: number };
 };
 
 export function TableEditRow({ table, mission, missions, usage }: Props) {
@@ -37,11 +37,6 @@ export function TableEditRow({ table, mission, missions, usage }: Props) {
             <Badge>{usage.submissions} envios</Badge>
             <Badge tone="green">{usage.approved} aprobadas</Badge>
             <span className="font-bold text-vino">{usage.points} pts</span>
-            {usage.manualPoints !== 0 ? (
-              <span className="font-semibold text-graphite">
-                {usage.approvedPoints} pruebas {usage.manualPoints > 0 ? "+" : ""}{usage.manualPoints} manual
-              </span>
-            ) : null}
           </div>
         </div>
         <div className="flex flex-wrap gap-2">

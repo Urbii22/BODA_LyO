@@ -55,12 +55,12 @@ export default async function Home() {
           <p className="mt-6 max-w-[58ch] text-xl leading-8 text-graphite">{appConfig.copy.intro}</p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href="/ranking"><Button type="button">Ver ranking</Button></Link>
-            <Link href="/grupo"><Button type="button" variant="ghost">Entrar al juego</Button></Link>
+            <Link href="/grupo/GRUPO-2"><Button type="button" variant="ghost">Ver grupo 2</Button></Link>
           </div>
         </div>
 
         <div className="grid gap-3 pb-6 md:grid-cols-3">
-          {["Escanead el QR unico", "Completad la mision secreta", "Subid una foto y sumad gloria"].map((step, index) => (
+          {["Escanead el QR de vuestro grupo", "Completad la mision secreta", "Subid una foto y sumad gloria"].map((step, index) => (
             <article key={step} className="sketch-card rounded-[0.35rem] p-4">
               <span className="font-hand text-3xl font-bold text-vino">0{index + 1}</span>
               <p className="mt-2 text-lg font-semibold leading-6">{step}</p>

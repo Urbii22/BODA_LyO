@@ -34,7 +34,7 @@ export function TableForm({ action, table, missions, submitLabel, defaultDisplay
   return (
     <form ref={formRef} action={formAction} className="grid gap-3">
       {table ? <input type="hidden" name="tableId" value={table.id} /> : null}
-      <div className="grid gap-3 sm:grid-cols-[1.3fr_0.8fr_0.5fr_0.6fr]">
+      <div className="grid gap-3 sm:grid-cols-[1.3fr_0.8fr_0.5fr]">
         <label className="grid gap-1">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Nombre</span>
           <Input name="name" defaultValue={table ? displayGroupName(table.name) : undefined} placeholder="Grupo 12" required maxLength={80} />
@@ -46,10 +46,6 @@ export function TableForm({ action, table, missions, submitLabel, defaultDisplay
         <label className="grid gap-1">
           <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Orden</span>
           <Input name="displayOrder" type="number" min={0} max={999} defaultValue={table?.displayOrder ?? defaultDisplayOrder} required />
-        </label>
-        <label className="grid gap-1">
-          <span className="text-xs font-bold uppercase tracking-[0.1em] text-graphite">Puntos</span>
-          <Input name="manualPoints" type="number" min={-9999} max={9999} defaultValue={table?.manualPoints ?? 0} required />
         </label>
       </div>
       <label className="grid gap-1">

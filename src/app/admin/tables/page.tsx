@@ -69,7 +69,7 @@ export default async function AdminTablesPage() {
               table={table}
               mission={table.missionId ? missionById.get(table.missionId) ?? null : null}
               missions={missions}
-              usage={usage[table.id] ?? { submissions: 0, approved: 0, approvedPoints: 0, manualPoints: table.manualPoints, points: table.manualPoints }}
+              usage={usage[table.id] ?? { submissions: 0, approved: 0, points: 0 }}
             />
           ))}
         </div>
