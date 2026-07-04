@@ -123,7 +123,7 @@ export default async function AdminPage() {
               Anadir o editar grupos <span className="text-vino">{tables.length}</span>
             </Link>
             <Link href="/admin/missions" className={actionClass}>
-              Ajustar misiones <span className="text-vino">{missions.length}</span>
+              Lanzar misiones <span className="text-vino">{missions.length}</span>
             </Link>
             <Link href="/admin/qr" className={actionClass}>
               Ver QR <span className="text-vino">imprimir</span>

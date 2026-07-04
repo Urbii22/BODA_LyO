@@ -8,4 +8,20 @@ export const missionFormSchema = z.object({
   category: z.enum(["social", "photo", "dance", "emotional", "funny"]),
 });
 
+export const missionLaunchSchema = z.object({
+  missionId: z.string().uuid("Elige una mision."),
+  targetMode: z.enum(["all", "group"]),
+  tableId: z.string().uuid("Elige un grupo.").optional(),
+  message: z.string().trim().max(180, "El aviso es demasiado largo.").optional(),
+}).superRefine((value, ctx) => {
+  if (value.targetMode === "group" && !value.tableId) {
+    ctx.addIssue({
+      code: "custom",
+      path: ["tableId"],
+      message: "Elige el grupo que recibira la mision.",
+    });
+  }
+});
+
 export type MissionFormInput = z.infer<typeof missionFormSchema>;
+export type MissionLaunchInput = z.infer<typeof missionLaunchSchema>;

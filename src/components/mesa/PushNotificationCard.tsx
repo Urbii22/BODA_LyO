@@ -87,7 +87,7 @@ export function PushNotificationCard({ tableCode }: { tableCode: string }) {
     unsupported: "Este navegador no admite notificaciones push web.",
     unavailable: "Los avisos push aun no estan configurados.",
     denied: "Las notificaciones estan bloqueadas en este navegador.",
-    idle: "Activad avisos para enteraros cuando llegue una nueva mision o el jurado revise una prueba.",
+    idle: "Activad avisos para recibir las misiones que lance el jurado y saber cuando revise una prueba.",
     subscribed: "Avisos activados en este dispositivo.",
     saving: "Activando avisos...",
   }[status];

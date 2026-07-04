@@ -1,4 +1,5 @@
 import { MissionEditRow } from "../../../components/admin/MissionEditRow";
+import { MissionLaunchCard } from "../../../components/admin/MissionLaunchCard";
 import { NewMissionCard } from "../../../components/admin/NewMissionCard";
 import { TableMissionSelect } from "../../../components/admin/TableMissionSelect";
 import { SetupNotice } from "../../../components/SetupNotice";
@@ -28,10 +29,11 @@ export default async function AdminMissionsPage() {
       <p className="hand-label text-lavanda">Control de retos</p>
       <h1 className="mt-1 font-serif text-6xl font-bold leading-none">Misiones</h1>
       <p className="mt-3 max-w-[60ch] text-graphite">
-        Crea, edita, oculta o borra retos sin tocar codigo. Abajo eliges que mision ve cada grupo; el cambio se guarda al instante.
+        Lanza retos en directo, crea nuevas misiones y ajusta que ve cada grupo sin tocar codigo.
       </p>
 
-      <div className="mt-6">
+      <div className="mt-6 grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+        <MissionLaunchCard missions={missions} tables={tables} />
         <NewMissionCard />
       </div>
 
